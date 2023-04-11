@@ -1,31 +1,38 @@
-import React, { useState } from "react";
-import { View } from "react-native";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-import { LoggedIn } from "./components/LoggedIn";
-import { Signup } from "./components/SignUp";
-import { Login } from "./components/LogIn";
-import { ResetPassword } from "./components/ResetPassword";
+import React from 'react'
+import { Provider } from 'react-native-paper'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import theme from './core/theme'
+import {
+  StartScreen,
+  LoginScreen,
+  RegisterScreen,
+  ResetPasswordScreen,
+  Dashboard,
+} from './screens'
+
+const Stack = createStackNavigator()
 
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [screen, setScreen] = useState(null);
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
-  });
-
-  const getScreen = () => {
-    if (loggedIn) return <LoggedIn />;
-    if (screen === "signup") return <Signup setScreen={setScreen} />;
-    if (screen === "reset-password")
-      return <ResetPassword setScreen={setScreen} />;
-    return <Login setScreen={setScreen} />;
-  };
-
-  return <View style={{ flex: 1 }}>{getScreen()}</View>;
+  return (
+    <Provider theme={theme}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="StartScreen"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="StartScreen" component={StartScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen
+            name="ResetPasswordScreen"
+            component={ResetPasswordScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  )
 }
