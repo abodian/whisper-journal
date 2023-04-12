@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 beforeAll(function (done) {
-  mongoose.connect('mongodb+srv://MichalS:misiek3500@cluster0.dekgoyo.mongodb.net/whisper_journal_cloud', {
+  mongoose.connect('mongodb+srv://AlexB:bodianA@cluster0.dekgoyo.mongodb.net/whisper_journal_cloud', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
