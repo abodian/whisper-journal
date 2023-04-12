@@ -6,6 +6,19 @@ const mongoose = require('mongoose');
 
 const EntryController = require('./controllers/entry')
 
+mongoose
+  .connect('mongodb+srv://AlexB:bodianA@cluster0.dekgoyo.mongodb.net/whisper_journal_cloud', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('MongoDB connected successfully');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+  });
+
+
 server.use(express.json()); 
 
 server.get("/", (req, res) => {
