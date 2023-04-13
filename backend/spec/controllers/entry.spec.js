@@ -9,9 +9,10 @@ describe('/entry', () => {
   beforeEach(async () => {
     await Entry.deleteMany({});
   });
-  afterAll( () => {
-     mongoose.connection.close();
+  afterAll(async () => {
+    await mongoose.connection.close();
   });
+ 
 
   describe('POST, when title and input are provided', () => {
     test('the response code is 201', async () => {
@@ -59,5 +60,9 @@ describe('/entry', () => {
       let entry = await Entry.find();
       expect(entry.length).toEqual(0);
     });
+  });
+
+  afterAll(() => {
+    server.close(); // close the server connection
   });
 });
