@@ -34,3 +34,5 @@
 
 - Alex Bodian [GitHub Profile](https://www.github.com/abodian), [LinkedIn](https://www.linkedin.com/in/alex-bodian-54814593/)
 - Michal Smyk [GitHub Profile](https://www.github.com/MichalSmyk), [LinkedIn](https://www.linkedin.com/in/michal-smyk-5066a2151/)
+
+firebase emulators:start

@@ -1,5 +1,5 @@
 // Login
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
@@ -16,6 +16,21 @@ import { auth } from "../firebase";
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Dashboard" }],
+        });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [navigation]);
 
   const loginUser = async () => {
     try {
