@@ -4,11 +4,11 @@ export const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    text: '#2C2C2C', // Dark gray
-    primary: '#2D6A4F', // Forest green
-    secondary: '#40916C', // Jade green
-    error: '#E63946', // Reddish pink
-    background: '#F8F9FA', // Light grayish background
+    text: '#264653', // Dark gray
+    primary: '#2A9D8F', // Forest green
+    secondary: '#E9C46A', // Jade green
+    error: '#F4A261', // Reddish pink
+    background: '#E76F51', // Light grayish background
     surface: '#F8F9FA', // Light grayish surface
   },
 }
