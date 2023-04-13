@@ -6,6 +6,6 @@ const EntrySchema = new mongoose.Schema({
   date: { type: Date },
 });
 
-const Entry = mongoose.model('Entry', EntrySchema);
+const Entry = mongoose.model('Entry', EntrySchema, 'Diary');
 
 module.exports = Entry;
