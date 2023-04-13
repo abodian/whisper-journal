@@ -1,32 +1,47 @@
 // Screen after login
 import React from 'react'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Paragraph from '../components/Paragraph'
-import Button from '../components/Button'
-import EntryCalendar from '../components/Calendar'
+import { View, StyleSheet } from 'react-native';
+
+
+import { Text, BottomNavigation } from 'react-native-paper';
+
+import BottomNavigator from '../components/BottomNavigation'
 
 export default function Dashboard({ navigation }) {
   return (
-    <Background>
-      <Logo />
-      <Header>Let’s start</Header>
-      <Paragraph>
-        Your Whisper Journal Journey Starts Here!
-      </Paragraph>
-      <EntryCalendar />
-      <Button
-        mode="outlined"
-        onPress={() =>
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'StartScreen' }],
-          })
-        }
-      >
-        Logout
-      </Button>
-    </Background>
+    <BottomNavigator HomeScreen={HomeScreen} SettingsScreen={SettingsScreen}/>
   )
 }
+
+function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      <Text variant="headlineMedium">Home!</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={styles.container}>
+      <Text variant="headlineMedium">Settings!</Text>
+    </View>
+  );
+}
+
+function LogOut (navigation) {
+  return (
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'StartScreen' }],
+    })
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

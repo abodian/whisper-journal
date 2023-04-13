@@ -1,5 +1,8 @@
+// BottomNavigator.js
 import React from 'react';
+import {View} from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import CustomTabBar from './CustomTabBar';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
@@ -8,8 +11,9 @@ export default function BottomNavigator({ HomeScreen, SettingsScreen }) {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
       }}
+      tabBar={(props) => <CustomTabBar {...props} />} // Use the custom TabBar component
     >
       <Tab.Screen
         name="Home"
@@ -33,11 +37,11 @@ export default function BottomNavigator({ HomeScreen, SettingsScreen }) {
       />
       <Tab.Screen
         name="Logout"
-        component={SettingsScreen}
+        component={View}
         options={{
           tabBarLabel: 'Logout',
           tabBarIcon: ({ color, size }) => {
-            return <Icon name="cog" size={size} color={color} />;
+            return <Icon name="logout" size={size} color={color} />;
           },
         }}
       />
