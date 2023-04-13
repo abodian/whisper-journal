@@ -6,17 +6,18 @@ import { View, StyleSheet } from 'react-native';
 import { Text, BottomNavigation } from 'react-native-paper';
 
 import BottomNavigator from '../components/BottomNavigation'
+import EntryCalendar from '../components/Calendar';
 
 export default function Dashboard({ navigation }) {
   return (
     <BottomNavigator HomeScreen={HomeScreen} SettingsScreen={SettingsScreen}/>
-  )
+  )  
 }
 
 function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Home!</Text>
+    <View style={styles.calendarContainer}>
+      <EntryCalendar />
     </View>
   );
 }
@@ -43,5 +44,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  calendarContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: 60,
   },
 });

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Calendar, LocaleConfig} from 'react-native-calendars';
+import {Calendar} from 'react-native-calendars';
 
 const EntryCalendar = () => {
 const [selected, setSelected] = useState('');
