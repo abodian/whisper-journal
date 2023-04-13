@@ -5,6 +5,7 @@ import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Paragraph from '../components/Paragraph'
 import Button from '../components/Button'
+import EntryCalendar from '../components/Calendar'
 
 export default function Dashboard({ navigation }) {
   return (
@@ -14,6 +15,7 @@ export default function Dashboard({ navigation }) {
       <Paragraph>
         Your Whisper Journal Journey Starts Here!
       </Paragraph>
+      <EntryCalendar />
       <Button
         mode="outlined"
         onPress={() =>
