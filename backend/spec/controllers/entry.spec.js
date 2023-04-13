@@ -2,16 +2,16 @@ const request = require('supertest');
 const app = require('../../server');
 require('../mongodb_helper');
 const Entry = require('../../models/entry');
-const server = require('../../server');
 var mongoose = require('mongoose');
 
 describe('/entry', () => {
   beforeEach(async () => {
     await Entry.deleteMany({});
   });
-  afterAll( () => {
-     mongoose.connection.close();
+  afterAll(async () => {
+    await mongoose.connection.close();
   });
+ 
 
   describe('POST, when title and input are provided', () => {
     test('the response code is 201', async () => {
@@ -55,9 +55,10 @@ describe('/entry', () => {
     });
 
     test('does not create an entry', async () => {
-      await request(server).post('/entry').send({ title: 'Sunny day' });
+      await request(app).post('/entry').send({ title: 'Sunny day' });
       let entry = await Entry.find();
       expect(entry.length).toEqual(0);
     });
   });
+
 });
