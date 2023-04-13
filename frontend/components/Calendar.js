@@ -10,7 +10,9 @@ return (
     style={{
         borderWidth: 1,
         borderColor: 'gray',
-        height: 370
+        height: 370,
+        width: 370,
+        borderRadius: 20
     }}
     // Specify the current date
     // current={'2023-04-13'}
