@@ -2,7 +2,6 @@ const request = require('supertest');
 const app = require('../../server');
 require('../mongodb_helper');
 const Entry = require('../../models/entry');
-const server = require('../../server');
 var mongoose = require('mongoose');
 
 describe('/entry', () => {
@@ -56,13 +55,10 @@ describe('/entry', () => {
     });
 
     test('does not create an entry', async () => {
-      await request(server).post('/entry').send({ title: 'Sunny day' });
+      await request(app).post('/entry').send({ title: 'Sunny day' });
       let entry = await Entry.find();
       expect(entry.length).toEqual(0);
     });
   });
 
-  afterAll(() => {
-    server.close(); // close the server connection
-  });
 });
