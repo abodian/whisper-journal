@@ -3,10 +3,14 @@ const app = require('../../server');
 require('../mongodb_helper');
 const Entry = require('../../models/entry');
 const server = require('../../server');
+var mongoose = require('mongoose');
 
 describe('/entry', () => {
   beforeEach(async () => {
     await Entry.deleteMany({});
+  });
+  afterAll( () => {
+     mongoose.connection.close();
   });
 
   describe('POST, when title and input are provided', () => {
