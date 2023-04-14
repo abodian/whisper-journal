@@ -3,6 +3,8 @@ import { View, StyleSheet } from 'react-native';
 import React, {useState} from 'react';
 import { Text } from 'react-native';
 import FormattedDate from '../components/Date';
+import AddEntry from '../components/AddEntry';
+import tw from 'react-native-tailwindcss';
 
 
 function SingleEntry() {
@@ -12,11 +14,15 @@ function SingleEntry() {
 
   return (
     <View style={styles.container}>
-        <Text ><FormattedDate date={date} /></Text>
+    <View style={styles.dateComponent}> 
+        <FormattedDate date={date} />
+    </View>
+     <View style={styles.entry}>
+        <AddEntry selectedDate={selectedDate} setSelectedDate={setSelectedDate}/>
+    </View>
     </View>
   )
 }
-
 
 const styles = StyleSheet.create({
     container: {
@@ -24,7 +30,17 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-})
-
+    dateComponent: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    entry: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
+  
 
 export default SingleEntry;
