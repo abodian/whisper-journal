@@ -1,15 +1,20 @@
 import React from 'react'
-import {StyleSheet, View} from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import { Text } from 'react-native-paper'
+
+const screenWidth = Dimensions.get('window').width;
+const marginRightPercentage = screenWidth < 400 ? 5 : 12; // last number adjusts how far apart the 
+// two elements are
 
 export default function SelectedDaySummary(props) {
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.title}>Selected Day Summary</Text>
+      <View style={styles.header}>
+        <Text style={[styles.title, { marginRight: screenWidth * marginRightPercentage / 100 }]}>Selected Day Summary</Text>
+        <Text style={styles.date}>Date Here</Text>
       </View>
       <View>
-        <Text style={styles.text}>Selected Day summary will go here</Text>
+        <Text style={styles.text}>Selected Date summary will go here</Text>
       </View>
     </View>
   )
@@ -17,11 +22,21 @@ export default function SelectedDaySummary(props) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 100,
+    height: 175,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 40,
   },
   title: {
     fontSize: 25,
     textAlign: 'left',
+  },
+  date: {
+    fontSize: 15,
+    textAlign: 'right',
   },
   text: {
     fontSize: 15,

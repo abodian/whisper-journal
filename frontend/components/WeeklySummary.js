@@ -3,7 +3,7 @@ import { StyleSheet, View, Dimensions } from 'react-native'
 import { Text } from 'react-native-paper'
 
 const screenWidth = Dimensions.get('window').width;
-const marginRightPercentage = screenWidth < 400 ? 5 : 15; // last number adjusts how far apart the 
+const marginRightPercentage = screenWidth < 400 ? 5 : 12; // last number adjusts how far apart the 
 // two elements are
 
 export default function WeeklySummary(props) {
