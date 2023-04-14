@@ -41,15 +41,6 @@ function SettingsScreen() {
   );
 }
 
-function LogOut (navigation) {
-  return (
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'StartScreen' }],
-    })
-  )
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
