@@ -1,10 +1,8 @@
 // Screen after login
 import React from 'react'
 import { View, StyleSheet } from 'react-native';
-
-
+import { useNavigation } from '@react-navigation/native'; // mike
 import { Text, BottomNavigation } from 'react-native-paper';
-
 import BottomNavigator from '../components/BottomNavigation'
 import EntryCalendar from '../components/Calendar';
 
@@ -15,9 +13,15 @@ export default function Dashboard({ navigation }) {
 }
 
 function HomeScreen() {
+  const navigation = useNavigation();
+
+  function handleDayPress(day) {
+    navigation.navigate('SingleEntry', { date: day.dateString });
+  }
+
   return (
     <View style={styles.calendarContainer}>
-      <EntryCalendar />
+      <EntryCalendar onDayPress={handleDayPress} />
     </View>
   );
 }
