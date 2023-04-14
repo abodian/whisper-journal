@@ -1,16 +1,11 @@
 import React from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import BottomNavigator from '../components/BottomNavigation'
 import EntryCalendar from '../components/Calendar';
 import WeeklySummary from '../components/WeeklySummary';
 import SelectedDaySummary from '../components/SelectedDaySummary';
-
-const { width, height } = Dimensions.get('window');
-const aspectRatio = width / height;
-const calendarHeight = aspectRatio >= 0.75 ? height * 0.4 : height * 0.3;
-const summaryHeight = (height - calendarHeight) / 2;
 
 
 export default function Dashboard({ navigation }) {
@@ -27,15 +22,17 @@ function HomeScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.calendarContainer, { height: calendarHeight }]}>
-      <EntryCalendar onDayPress={handleDayPress} />
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.calendarContainer}>
+        <EntryCalendar onDayPress={handleDayPress} />
+        </View>
+        <View style={styles.summaryContainer}>
+          <WeeklySummary style={styles.weeklyContainer}/>
+          <SelectedDaySummary styles={styles.selectedDayContainer}/>
+        </View>
       </View>
-      <View style={[styles.summaryContainer, { height: summaryHeight }]}>
-        <WeeklySummary style={styles.weeklyContainer}/>
-        <SelectedDaySummary styles={styles.selectedDayContainer}/>
-      </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -49,15 +46,16 @@ function SettingsScreen() {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'column',
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   calendarContainer: {
     flex: 2,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingTop: 65,
+    paddingTop: 50,
+    padding: 20,
   },
   summaryContainer: {
     flex: 2,
