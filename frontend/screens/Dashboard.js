@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text } from 'react-native-paper';
-
+import { useNavigation } from '@react-navigation/native';
 import BottomNavigator from '../components/BottomNavigation'
 import EntryCalendar from '../components/Calendar';
 import WeeklySummary from '../components/WeeklySummary';
@@ -15,11 +15,17 @@ export default function Dashboard({ navigation }) {
 }
 
 function HomeScreen() {
+  const navigation = useNavigation();
+
+  function handleDayPress(day) {
+    navigation.navigate('SingleEntry', { date: day.dateString });
+  }
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.calendarContainer}>
-          <EntryCalendar />
+        <EntryCalendar onDayPress={handleDayPress} />
         </View>
         <View style={styles.summaryContainer}>
           <WeeklySummary style={styles.weeklyContainer}/>
@@ -49,7 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingTop: 50,
-    padding: 20
+    padding: 20,
   },
   summaryContainer: {
     flex: 2,
