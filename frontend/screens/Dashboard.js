@@ -1,12 +1,17 @@
-// Screen after login
 import React from 'react'
-import { View, StyleSheet } from 'react-native';
-
-
-import { Text, BottomNavigation } from 'react-native-paper';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import { Text } from 'react-native-paper';
 
 import BottomNavigator from '../components/BottomNavigation'
 import EntryCalendar from '../components/Calendar';
+import WeeklySummary from '../components/WeeklySummary';
+import SelectedDaySummary from '../components/SelectedDaySummary';
+
+const { width, height } = Dimensions.get('window');
+const aspectRatio = width / height;
+const calendarHeight = aspectRatio >= 0.75 ? height * 0.4 : height * 0.3;
+const summaryHeight = (height - calendarHeight) / 2;
+
 
 export default function Dashboard({ navigation }) {
   return (
@@ -16,8 +21,14 @@ export default function Dashboard({ navigation }) {
 
 function HomeScreen() {
   return (
-    <View style={styles.calendarContainer}>
-      <EntryCalendar />
+    <View style={styles.container}>
+      <View style={[styles.calendarContainer, { height: calendarHeight }]}>
+        <EntryCalendar />
+      </View>
+      <View style={[styles.summaryContainer, { height: summaryHeight }]}>
+        <WeeklySummary style={styles.weeklyContainer}/>
+        <SelectedDaySummary styles={styles.selectedDayContainer}/>
+      </View>
     </View>
   );
 }
@@ -30,15 +41,6 @@ function SettingsScreen() {
   );
 }
 
-function LogOut (navigation) {
-  return (
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'StartScreen' }],
-    })
-  )
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,9 +48,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   calendarContainer: {
+    flex: 2,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingTop: 65,
+  },
+  summaryContainer: {
+    flex: 2,
+    flexDirection: 'column',
+  },
+  weeklyContainer: {
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    paddingTop: 60,
+  },
+  selectedDayContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
 });
