@@ -8,7 +8,7 @@ const marginRightPercentage = screenWidth < 400 ? 5 : 12; // last number adjusts
 
 export default function WeeklySummary(props) {
   return (
-    <View style={styles.container}>
+    <View style={styles.weeklySummary}>
       <View style={styles.header}>
         <Text style={[styles.title, { marginRight: screenWidth * marginRightPercentage / 100 }]}>Weekly Summary</Text>
         <Text style={styles.date}>Date Drop Down</Text>
@@ -21,7 +21,7 @@ export default function WeeklySummary(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  weeklySummary: {
     height: 175,
   },
   header: {
