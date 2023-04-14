@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet, View, Text } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { Icon } from 'react-native-elements';
 
-const EntryCalendar = () => {
+const EntryCalendar = ({ onDayPress }) => {
     const [selected, setSelected] = useState('');
 
     const renderArrow = (direction) => (
@@ -30,9 +30,7 @@ const EntryCalendar = () => {
             // Specify the current date
             // current={'2023-04-13'}
             // Callback that gets called when the user selects a day
-            onDayPress={day => {
-                console.log('selected day', day);
-            }}
+            onDayPress={onDayPress}
             // Mark specific dates as marked
             markedDates={{
                 '2023-04-01': {selected: true, marked: true, selectedColor: 'green'},
