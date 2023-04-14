@@ -6,7 +6,7 @@ const AddEntry = ({ selectedDate, setSelectedDate }) => {
     const [input, setInput] = useState('');
  
 
-    const handleAddEntry = ({ selectedDate, setSelectedDate }) => {
+    const handleAddEntry = () => {
     const data = {
         title: title,
         input: input,
