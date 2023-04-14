@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { Text } from 'react-native-paper';
-
+import { useNavigation } from '@react-navigation/native';
 import BottomNavigator from '../components/BottomNavigation'
 import EntryCalendar from '../components/Calendar';
 import WeeklySummary from '../components/WeeklySummary';
@@ -29,7 +29,7 @@ function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={[styles.calendarContainer, { height: calendarHeight }]}>
-        <EntryCalendar />
+      <EntryCalendar onDayPress={handleDayPress} />
       </View>
       <View style={[styles.summaryContainer, { height: summaryHeight }]}>
         <WeeklySummary style={styles.weeklyContainer}/>
