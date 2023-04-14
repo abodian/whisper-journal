@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { Text } from 'react-native-paper';
 
 import BottomNavigator from '../components/BottomNavigation'
@@ -16,15 +16,17 @@ export default function Dashboard({ navigation }) {
 
 function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <View style={[styles.calendarContainer]}>
-        <EntryCalendar calendarStyle={styles.calendar} />
+    <ScrollView>
+      <View style={styles.container}>
+        <View style={styles.calendarContainer}>
+          <EntryCalendar />
+        </View>
+        <View style={styles.summaryContainer}>
+          <WeeklySummary style={styles.weeklyContainer}/>
+          <SelectedDaySummary styles={styles.selectedDayContainer}/>
+        </View>
       </View>
-      <View style={[styles.summaryContainer]}>
-        <WeeklySummary style={styles.weeklyContainer}/>
-        <SelectedDaySummary styles={styles.selectedDayContainer}/>
-      </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -47,11 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingTop: 50,
-    padding: 60
-  },
-  calendar: {
-    // width: Dimensions.get('window').width - 20,
-    // height: Dimensions.get('window').height * 0.10,
+    padding: 20
   },
   summaryContainer: {
     flex: 2,
