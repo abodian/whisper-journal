@@ -7,12 +7,13 @@ import { Text } from 'react-native';
 function SingleEntry() {
     const route = useRoute();
     const { date } = route.params;
-
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = new Date(date).toLocaleDateString(undefined, options);
     const [selectedDate, setSelectedDate] = useState(date);
 
   return (
     <View style={styles.container}>
-        <Text >todays date : {date}</Text>
+        <Text >You are adding an entry for {formattedDate}</Text>
     </View>
   )
 }
