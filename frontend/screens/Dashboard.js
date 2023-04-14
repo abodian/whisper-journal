@@ -7,10 +7,10 @@ import EntryCalendar from '../components/Calendar';
 import WeeklySummary from '../components/WeeklySummary';
 import SelectedDaySummary from '../components/SelectedDaySummary';
 
-const { width, height } = Dimensions.get('window');
-const aspectRatio = width / height;
-const calendarHeight = aspectRatio >= 0.75 ? height * 0.4 : height * 0.3;
-const summaryHeight = (height - calendarHeight) / 2;
+// const { width, height } = Dimensions.get('window');
+// const aspectRatio = width / height;
+// const calendarHeight = aspectRatio >= 0.75 ? height * 0.4 : height * 0.3;
+// const summaryHeight = (height - calendarHeight) / 2;
 
 
 export default function Dashboard({ navigation }) {
@@ -22,10 +22,10 @@ export default function Dashboard({ navigation }) {
 function HomeScreen() {
   return (
     <View style={styles.container}>
-      <View style={[styles.calendarContainer, { height: calendarHeight }]}>
+      <View style={[styles.calendarContainer]}>
         <EntryCalendar />
       </View>
-      <View style={[styles.summaryContainer, { height: summaryHeight }]}>
+      <View style={[styles.summaryContainer]}>
         <WeeklySummary style={styles.weeklyContainer}/>
         <SelectedDaySummary styles={styles.selectedDayContainer}/>
       </View>
