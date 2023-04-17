@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Tab = createBottomTabNavigator();
 
-export default function BottomNavigator({ Home, Settings }) {
+export default function BottomNavigator({ Home, Settings, SingleEntry }) {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -26,22 +26,22 @@ export default function BottomNavigator({ Home, Settings }) {
         }}
       />
       <Tab.Screen
+        name="AddEntry"
+        component={SingleEntry}
+        options={{
+          tabBarLabel: 'Add Entry',
+          tabBarIcon: ({ color, size }) => {
+            return <Icon name="plus" size={size} color={color} />;
+          },
+        }}
+      />
+      <Tab.Screen
         name="Settings"
         component={Settings}
         options={{
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color, size }) => {
             return <Icon name="cog" size={size} color={color} />;
-          },
-        }}
-      />
-      <Tab.Screen
-        name="Logout"
-        component={View}
-        options={{
-          tabBarLabel: 'Logout',
-          tabBarIcon: ({ color, size }) => {
-            return <Icon name="logout" size={size} color={color} />;
           },
         }}
       />
