@@ -1,20 +1,19 @@
 import React from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import BottomNavigator from '../components/BottomNavigation'
 import EntryCalendar from '../components/Calendar';
 import WeeklySummary from '../components/WeeklySummary';
 import SelectedDaySummary from '../components/SelectedDaySummary';
-
+import SettingsScreen from './SettingsScreen';
 
 export default function Dashboard({ navigation }) {
   return (
-    <BottomNavigator HomeScreen={HomeScreen} SettingsScreen={SettingsScreen}/>
+    <BottomNavigator Home={Home} Settings={Settings}/>
   )  
 }
 
-function HomeScreen() {
+function Home() {
   const navigation = useNavigation();
 
   function handleDayPress(day) {
@@ -36,11 +35,9 @@ function HomeScreen() {
   );
 }
 
-function SettingsScreen() {
+function Settings() {
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Settings!</Text>
-    </View>
+    <SettingsScreen />
   );
 }
 
