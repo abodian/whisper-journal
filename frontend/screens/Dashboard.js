@@ -9,7 +9,7 @@ import SettingsScreen from './SettingsScreen';
 
 export default function Dashboard({ navigation }) {
   return (
-    <BottomNavigator Home={Home} Settings={Settings}/>
+    <BottomNavigator Home={Home} Settings={Settings} SingleEntry={SingleEntryNavigator}/>
   )  
 }
 
@@ -33,6 +33,13 @@ function Home() {
       </View>
     </ScrollView>
   );
+}
+
+function SingleEntryNavigator() {
+  const navigation = useNavigation();
+  const today = new Date();
+  const dateString = today.toISOString().split('T')[0]; // format as "YYYY-MM-DD"
+  navigation.navigate('SingleEntry', { date: dateString });
 }
 
 function Settings() {

@@ -11,7 +11,7 @@ const addEntryHeight = (height - dateHeight) / 2;
 
 
 
-function SingleEntry() {
+function SingleEntry({navigation}) {
     const route = useRoute();
     const { date } = route.params;
     const [selectedDate, setSelectedDate] = useState(date);
