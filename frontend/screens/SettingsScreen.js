@@ -1,10 +1,12 @@
 // signup
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 import Button from "../components/Button";
 import { auth } from "../firebase"
 
-export default function SettingsScreen({ navigation }) {
+export default function SettingsScreen() {
+  const navigation = useNavigation();
 
   const logout = async () => {
     try {
@@ -18,12 +20,16 @@ export default function SettingsScreen({ navigation }) {
     }
   };
 
+  const resetPasswordNavigator = () => {
+    navigation.navigate('ResetPasswordScreen')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.settingsContainer}>
         <Button
           mode="contained"
-          // onPress={}
+          onPress={resetPasswordNavigator}
           style={{marginTop: 100, width: 200}}
         >
           Change Password
