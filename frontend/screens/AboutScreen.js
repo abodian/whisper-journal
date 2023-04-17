@@ -1,20 +1,17 @@
-import { View, Text, StyleSheet } from 'react-native';
+import Background from "../components/Background";
+import BackButton from "../components/BackButton";
+import Logo from "../components/Logo";
+import Header from "../components/Header";
+import { useNavigation } from '@react-navigation/native';
 
 export default function AboutScreen() {
+  const navigation = useNavigation();
   return (
-  <View style={styles.container}>
-    <Text style={{marginTop: 200}}>
-      About Screen
-    </Text>
-  </View>
+    <Background>
+      <BackButton goBack={navigation.goBack} />
+      <Logo />
+      <Header>About App Page</Header>
+    </Background>
   )
 }
 
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'column',
-    flex: 1,
-    alignItems: 'center',
-  }
-});
