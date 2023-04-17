@@ -27,7 +27,7 @@ const AddEntry = ({ selectedDate, setSelectedDate }) => {
         // handle successful response from server
         console.log('Entry created successfully!');
         setTitle('');
-        setInput('');
+        setIsDiaryEntryFocused('');
         setSelectedDate('');
     })
         .catch((error) => {
