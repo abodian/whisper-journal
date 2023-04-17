@@ -2,8 +2,21 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import Button from "../components/Button";
+import { auth } from "../firebase"
 
 export default function SettingsScreen({ navigation }) {
+
+  const logout = async () => {
+    try {
+      await auth.signOut();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "LoginScreen" }],
+      });
+    } catch (error) {
+      console.log("Error signing out: ", error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -32,8 +45,9 @@ export default function SettingsScreen({ navigation }) {
       </View>
       <View style={styles.logoutContainer}>
         <Button
-        mode="outlined"
-        style={{marginTop: 200 }}
+          mode="outlined"
+          onPress={logout}
+          style={{marginTop: 200 }}
         >
           Logout
         </Button>
