@@ -1,23 +1,22 @@
 import React from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import BottomNavigator from '../components/BottomNavigation'
 import EntryCalendar from '../components/Calendar';
 import WeeklySummary from '../components/WeeklySummary';
 import SelectedDaySummary from '../components/SelectedDaySummary';
-
+import SettingsScreen from './SettingsScreen';
 
 export default function Dashboard({ navigation }) {
   return (
-    <BottomNavigator HomeScreen={HomeScreen} SettingsScreen={SettingsScreen}/>
+    <BottomNavigator Home={Home} Settings={Settings} SingleEntry={SingleEntryNavigator}/>
   )  
 }
 
-function HomeScreen() {
+function Home() {
   const navigation = useNavigation();
 
-  function handleDayPress(day) {
+  const handleDayPress = (day) => {
     navigation.navigate('SingleEntry', { date: day.dateString });
   }
 
@@ -36,11 +35,17 @@ function HomeScreen() {
   );
 }
 
-function SettingsScreen() {
+function SingleEntryNavigator() {
+  const navigation = useNavigation();
+  const today = new Date();
+  const dateString = today.toISOString().split('T')[0]; // format as "YYYY-MM-DD"
+  navigation.navigate('SingleEntry', { date: dateString });
+}
+
+function Settings() {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Text variant="headlineMedium">Settings!</Text>
-    </View>
+    <SettingsScreen />
   );
 }
 
