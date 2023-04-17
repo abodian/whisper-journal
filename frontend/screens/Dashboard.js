@@ -36,8 +36,9 @@ function Home() {
 }
 
 function Settings() {
+  const navigation = useNavigation();
   return (
-    <SettingsScreen />
+    <SettingsScreen navigation={navigation} />
   );
 }
 
