@@ -24,6 +24,14 @@ export default function SettingsScreen() {
     navigation.navigate('ResetPasswordScreen')
   }
 
+  const updateEmailNavigator = () => {
+    navigation.navigate('UpdateEmailScreen')
+  }
+
+  const aboutScreenNavigator = () => {
+    navigation.navigate('AboutScreen')
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.settingsContainer}>
@@ -36,14 +44,14 @@ export default function SettingsScreen() {
         </Button>
         <Button
           mode="contained"
-          // onPress={}
+          onPress={updateEmailNavigator}
           style={{marginTop: 5, width: 200}}
         >
           Change Email
         </Button>
         <Button
           mode="contained"
-          // onPress={}
+          onPress={aboutScreenNavigator}
           style={{marginTop: 5, width: 200}}
         >
           About

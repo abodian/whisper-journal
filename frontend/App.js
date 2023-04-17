@@ -11,6 +11,8 @@ import {
   Dashboard,
   SingleEntry,
   SettingsScreen,
+  UpdateEmailScreen,
+  AboutScreen,
 } from './screens'
 
 const Stack = createStackNavigator()
@@ -31,6 +33,8 @@ export default function App() {
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="SingleEntry" component={SingleEntry} />
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
+          <Stack.Screen name="UpdateEmailScreen" component={UpdateEmailScreen} />
+          <Stack.Screen name="AboutScreen" component={AboutScreen} />
           <Stack.Screen
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}

@@ -13,7 +13,7 @@ export default function BottomNavigator({ Home, Settings, SingleEntry }) {
       screenOptions={{
         headerShown: false,
       }}
-      tabBar={(props) => <CustomTabBar {...props} />} // Use the custom TabBar component
+      tabBar={(props) => <CustomTabBar {...props} />} 
     >
       <Tab.Screen
         name="Home"
