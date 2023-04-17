@@ -16,7 +16,7 @@ export default function Dashboard({ navigation }) {
 function Home() {
   const navigation = useNavigation();
 
-  function handleDayPress(day) {
+  const handleDayPress = (day) => {
     navigation.navigate('SingleEntry', { date: day.dateString });
   }
 
@@ -45,7 +45,7 @@ function SingleEntryNavigator() {
 function Settings() {
   const navigation = useNavigation();
   return (
-    <SettingsScreen navigation={navigation} />
+    <SettingsScreen />
   );
 }
 
