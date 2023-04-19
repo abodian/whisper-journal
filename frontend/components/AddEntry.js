@@ -29,6 +29,7 @@ const AddEntry = ({ selectedDate, setSelectedDate }) => {
         setTitle('');
         setIsDiaryEntryFocused('');
         setSelectedDate('');
+        navigation.navigate('AnalysisScreen', { input });
     })
         .catch((error) => {
         // handle error
