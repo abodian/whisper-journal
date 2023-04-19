@@ -41,11 +41,22 @@ const openai = new OpenAIApi(configuration);
 const chapGPT = async (prompt) => {
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: prompt }],
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are a helpful assistant that translates English to French.",
+      },
+      {
+        role: "user",
+        content:
+          'Translate the following English text to French: "I very much like cheese and wine"',
+      },
+    ],
   });
   console.log(response["data"]["choices"][0]["message"]["content"]);
 };
 
-chapGPT("what are some theories on what is one piece?");
+chapGPT();
 
 module.exports = server;
