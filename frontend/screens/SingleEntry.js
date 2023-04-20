@@ -6,8 +6,6 @@ import AddEntry from '../core/AddEntry';
 import BackButton from "../components/BackButton";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAudioRecording } from '../core/audioRecording';
-import { Audio } from 'expo-av';
-
 
 const { width, height } = Dimensions.get('window');
 const aspectRatio = width / height;
@@ -19,37 +17,15 @@ function SingleEntry({ navigation }) {
   const { date } = route.params;
   const [selectedDate, setSelectedDate] = useState(date);
   const [isRecording, setIsRecording] = useState(false);
-  const { startRecording, stopRecording } = useAudioRecording();
-  const [sound, setSound] = useState(null);
-
-  async function playRecording(recordings) {
-    const { sound: newSound } = await Audio.Sound.createAsync(
-      { recordings },
-      {},
-      null,
-      false
-    );
-    setSound(newSound);
-    await newSound.playAsync();
-  }
-
-  useEffect(() => {
-    return () => {
-      if (sound) {
-        sound.unloadAsync();
-      }
-    };
-  }, [sound]);
+  const { startRecording, stopRecording, transcribeRecording } = useAudioRecording();
 
   const handleMicrophonePress = async () => {
     if (!isRecording) {
       await startRecording();
     } else {
-      const recordings = await stopRecording();
-      if (recordings) {
-        console.log('Recorded audio file URI:', uri);
-        playRecording(recordings.sound)
-      }
+      await stopRecording();
+      setIsRecording(false);
+      await transcribeRecording(); // Call transcribeRecording function after stopping the recording
     }
     setIsRecording(!isRecording);
   };
