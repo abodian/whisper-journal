@@ -6,27 +6,23 @@ const AnalysedEntry = ({ diaryEntry }) => {
   const [analysis, setAnalysis] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/analyse', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify( {prompt: diaryEntry} ),
+    const fetchData = () => {
+      fetch('http://192.168.1.197:3001/analyse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: diaryEntry }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          setAnalysis(data.completion);
+        })
+        .catch(error => {
+          console.error(error);
         });
-        console.log('diaryEntry second :', diaryEntry)
-       
-        const data = await response.text();
-         console.log('data', data)
-        // console.log('response', response)
-        setAnalysis(data.completion);
-        // console.log('analysis',analysis)
-      } catch (error) {
-        console.error(error);
-      }
     };
-
+  
     fetchData();
   }, [diaryEntry]);
 
