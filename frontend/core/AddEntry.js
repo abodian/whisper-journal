@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const AddEntry = ({ selectedDate, setSelectedDate }) => {
     const [isTitleFocused, setIsTitleFocused] = useState(false);
     const [isDiaryEntryFocused, setIsDiaryEntryFocused] = useState(false);
     const [title, setTitle] = useState('');
     const [diaryEntry, setDiaryEntry] = useState('');
- 
+    const navigation = useNavigation();
 
     const handleAddEntry = () => {
     const data = {
@@ -29,6 +30,7 @@ const AddEntry = ({ selectedDate, setSelectedDate }) => {
         setTitle('');
         setIsDiaryEntryFocused('');
         setSelectedDate('');
+        navigation.navigate('AnalysisScreen', { diaryEntry: diaryEntry });
     })
         .catch((error) => {
         // handle error
