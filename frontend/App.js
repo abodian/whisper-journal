@@ -13,6 +13,7 @@ import {
   SettingsScreen,
   UpdateEmailScreen,
   AboutScreen,
+  AnalysisScreen,
 } from './screens'
 
 const Stack = createStackNavigator()
@@ -35,6 +36,7 @@ export default function App() {
           <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
           <Stack.Screen name="UpdateEmailScreen" component={UpdateEmailScreen} />
           <Stack.Screen name="AboutScreen" component={AboutScreen} />
+          <Stack.Screen name='AnalysisScreen' component={AnalysisScreen} />
           <Stack.Screen
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}
