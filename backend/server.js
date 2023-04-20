@@ -38,7 +38,7 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
-const chapGPT = async (prompt) => {
+const chatGPTAnalysis = async (prompt) => {
   const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [
@@ -57,6 +57,16 @@ const chapGPT = async (prompt) => {
   console.log(response["data"]["choices"][0]["message"]["content"]);
 };
 
-chapGPT();
+const chatGTPTranscribe = async (file) => {
+  const response = await this.openai.createTranscription({
+    file: file,
+    model: "whisper-1",
+    temperature: 0.2,
+    language: "en",
+  });
+  return response.data;
+};
+
+chatGPTAnalysis();
 
 module.exports = server;

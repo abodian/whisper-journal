@@ -22,9 +22,9 @@ function SingleEntry({ navigation }) {
   const { startRecording, stopRecording } = useAudioRecording();
   const [sound, setSound] = useState(null);
 
-  async function playRecording(uri) {
+  async function playRecording(recordings) {
     const { sound: newSound } = await Audio.Sound.createAsync(
-      { uri },
+      { recordings },
       {},
       null,
       false
@@ -45,10 +45,10 @@ function SingleEntry({ navigation }) {
     if (!isRecording) {
       await startRecording();
     } else {
-      const uri = await stopRecording();
-      if (uri) {
+      const recordings = await stopRecording();
+      if (recordings) {
         console.log('Recorded audio file URI:', uri);
-        playRecording(uri)
+        playRecording(recordings.sound)
       }
     }
     setIsRecording(!isRecording);
