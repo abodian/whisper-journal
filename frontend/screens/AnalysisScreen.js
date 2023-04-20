@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import AnalysedEntry from '../components/Analysis';
+import AnalysedEntry from '../core/Analysis';
 
 
 const AnalysisScreen = ({ route }) => {
