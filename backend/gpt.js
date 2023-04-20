@@ -1,5 +1,7 @@
 const { Configuration, OpenAIApi } = require("openai");
 const fs = require("fs");
+const os = require("os");
+const path = require("path");
 
 const configuration = new Configuration({
   apiKey: "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",
@@ -28,17 +30,21 @@ const chatGPT = async (prompt) => {
   return response.data.choices[0].message.content;
 };
 
-const chatGPTTranscribe = async (file) => {
+const chatGPTTranscribe = async (buffer) => {
+  // const tempFilePath = path.join(__dirname, "temp_audio.m4a");
+  // console.log(tempFilePath);
+  // // write the buffer to a temporary .m4a file
+  // fs.writeFileSync(tempFilePath, buffer);
   try {
     const response = await openai.createTranscription(
-      fs.createReadStream(file),
+      fs.createReadStream(buffer),
       "whisper-1"
     );
-    console.log(response.data.text);
+    console.log("response data", response.data.text);
     return response.data.text;
   } catch (error) {
     console.error("An error occurred while transcribing the file:", error);
-    throw error;
+    // throw error;
   }
 };
 

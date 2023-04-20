@@ -4,6 +4,7 @@ const port = process.env.PORT || 3001;
 const mongoose = require("mongoose");
 const EntryController = require("./controllers/entry");
 const AnalysisController = require("./controllers/analyse");
+const TranscribeController = require("./controllers/transcribe");
 
 mongoose
   .connect(
@@ -28,9 +29,12 @@ server.get("/", (req, res) => {
 
 server.post("/entry", EntryController.Create);
 
-
-server.post('/analyse', AnalysisController.Analyse);
-
+server.post("/analyse", AnalysisController.Analyse);
+server.post(
+  "/transcribe",
+  TranscribeController.upload,
+  TranscribeController.Transcribe
+);
 
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
