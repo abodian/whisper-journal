@@ -16,7 +16,7 @@ const AnalysedEntry = ({ diaryEntry }) => {
       })
         .then(response => response.json())
         .then(data => {
-          setAnalysis(data.completion);
+          setAnalysis(data.analysis);
         })
         .catch(error => {
           console.error(error);
@@ -25,6 +25,7 @@ const AnalysedEntry = ({ diaryEntry }) => {
   
     fetchData();
   }, [diaryEntry]);
+
 
   return (
     <View>

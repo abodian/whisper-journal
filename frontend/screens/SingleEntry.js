@@ -2,7 +2,7 @@ import { useRoute } from '@react-navigation/native';
 import { View, StyleSheet, Dimensions, Text, KeyboardAvoidingView } from 'react-native';
 import React, {useState} from 'react';
 import FormattedDate from '../components/Date';
-import AddEntry from '../components/AddEntry';
+import AddEntry from '../core/AddEntry';
 import BackButton from "../components/BackButton";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
