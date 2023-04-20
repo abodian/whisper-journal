@@ -14,7 +14,7 @@ const response = await openai.createChatCompletion({
     {
         role: 'system',
         content:
-        'You are a helpful psychologist that helps me analyse my diary entries.',
+        'Please provide a mood/sentiment analysis, personalized feedback, and recommendations for improvement based on the users diary entry. Additionally, please suggest any atomic habit improvements that could help the user improve their daily routine',
     },
     {
         role: 'user',
