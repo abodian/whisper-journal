@@ -1,16 +1,16 @@
 import React from 'react';
 import { View } from 'react-native';
-import AnalysedEntry from '../components/AnalysedEntry';
+import AnalysedEntry from '../components/Analysis';
 
 
-const AnalysedScreen = ({ route }) => {
-  const { input } = route.params;
+const AnalysisScreen = ({ route }) => {
+  const { diaryEntry } = route.params;
 
   return (
     <View>
-      <AnalysedEntry input={input} />
+      <AnalysedEntry diaryEntry={diaryEntry} />
     </View>
   );
 };
 
-export default AnalysedScreen;
+export default AnalysisScreen;
