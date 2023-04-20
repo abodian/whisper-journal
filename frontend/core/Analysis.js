@@ -7,7 +7,7 @@ const AnalysedEntry = ({ diaryEntry }) => {
 
   useEffect(() => {
     const fetchData = () => {
-      fetch('http://192.168.1.197:3001/analyse', {
+      fetch('https://whisper-journal1.onrender.com/analyse', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
