@@ -176,7 +176,7 @@ import { Audio } from 'expo-av';
 
 export function useAudioRecording() {
   const [recording, setRecording] = useState(null);
-  const [recordings, setRecordings] = React.useState([]);
+  const [recordings, setRecordings] = useState([]);
 
   const recordingOptions = {
     android: {
