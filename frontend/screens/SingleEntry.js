@@ -74,10 +74,10 @@ function SingleEntry({ navigation }) {
         <Text>Press the microphone button to add your entry!</Text>
         <AddEntry selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
       </View>
-      <View style={styles.entry}>
+      <View style={styles.microphone}>
         <Icon.Button
           name="microphone"
-          size={150}
+          size={120}
           color={isRecording ? 'red' : 'black'}
           backgroundColor="transparent"
           onPress={handleMicrophonePress}
@@ -90,6 +90,7 @@ function SingleEntry({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
@@ -106,6 +107,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 40,
   },
+  microphone: {
+    flex: 0,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  }
 });
 
 export default SingleEntry;
