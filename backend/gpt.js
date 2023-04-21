@@ -31,10 +31,10 @@ const chatGPT = async (prompt) => {
 };
 
 const chatGPTTranscribe = async (buffer) => {
-  // const tempFilePath = path.join(__dirname, "temp_audio.m4a");
-  // console.log(tempFilePath);
-  // // write the buffer to a temporary .m4a file
-  // fs.writeFileSync(tempFilePath, buffer);
+  const tempFilePath = path.join(__dirname, "temp_audio.m4a");
+  console.log(tempFilePath);
+  // write the buffer to a temporary .m4a file
+  fs.writeFileSync(tempFilePath, buffer);
   try {
     const response = await openai.createTranscription(
       fs.createReadStream(buffer),
