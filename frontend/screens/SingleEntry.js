@@ -6,6 +6,8 @@ import AddEntry from '../core/AddEntry';
 import BackButton from "../components/BackButton";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAudioRecording } from '../core/audioRecording';
+import { Audio } from 'expo-av';
+import { readFileAsBase64 } from '../logic/readFileAsBase64';
 
 const { width, height } = Dimensions.get('window');
 const aspectRatio = width / height;
@@ -18,18 +20,44 @@ function SingleEntry({ navigation }) {
   const [selectedDate, setSelectedDate] = useState(date);
   const [isRecording, setIsRecording] = useState(false);
   const { startRecording, stopRecording, transcribeRecording } = useAudioRecording();
+  const [sound, setSound] = useState(null);
+
+  async function playRecording(uri) {
+    const { sound: newSound } = await Audio.Sound.createAsync(
+      { uri },
+      {},
+      null,
+      false
+    );
+    setSound(newSound);
+    await newSound.playAsync();
+  }
+
+  useEffect(() => {
+    return () => {
+      if (sound) {
+        sound.unloadAsync();
+      }
+    };
+  }, [sound]);
 
   const handleMicrophonePress = async () => {
     if (!isRecording) {
       await startRecording();
     } else {
-      await stopRecording();
-      setIsRecording(false);
-      await transcribeRecording(); // Call transcribeRecording function after stopping the recording
+      const uri = await stopRecording();
+      if (uri) {
+        console.log('Recorded audio file URI:', uri);
+        playRecording(uri)
+        const base64Audio = await readFileAsBase64(uri)
+        console.log('handlemicrophonepressbase64', base64Audio)
+        transcribeRecording(base64Audio)
+      }
     }
     setIsRecording(!isRecording);
   };
   
+
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">

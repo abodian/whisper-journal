@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Audio } from 'expo-av';
+import base64 from 'react-native-base64';
 import { Platform } from 'react-native'; // Import Platform
 import { encode } from 'base-64';
 import * as FileSystem from 'expo-file-system';
@@ -8,6 +9,7 @@ import * as FileSystem from 'expo-file-system';
 export function useAudioRecording() {
   const [recording, setRecording] = useState(null);
   const [recordings, setRecordings] = useState([]);
+  
 
   const recordingOptions = {
     android: {
@@ -64,17 +66,9 @@ export function useAudioRecording() {
     console.log('Stopping recording..');
     await recording.stopAndUnloadAsync();
     const uri = recording.getURI();
-    let updatedRecordings = [...recordings];
-    const { sound, status } = await recording.createNewLoadedSoundAsync();
-    updatedRecordings.push({
-      sound: sound,
-      duration: getDurationFormatted(status.durationMillis),
-      file: recording.getURI(),
-    });
-    setRecordings(updatedRecordings);
+    setRecording(null);
     console.log('Recording stopped and stored at', uri);
-    setRecording(null)
-    return recordings;
+    return uri;
   }, [recording]);
 
   const getDurationFormatted = (millis) => {
@@ -103,21 +97,20 @@ export function useAudioRecording() {
     });
   }
 
-  const transcribeRecording = async () => {
-    const uri = recording.getURI();
-  
-    const formData = new FormData();
-    formData.append('file', {
-      uri: Platform.OS === 'android' ? uri : uri.replace('file://', ''),
-      name: 'audio.m4a',
-      type: 'audio/m4a',
-    });
-  
+
+  const transcribeRecording = async (audioBase64) => {
+    console.log(audioBase64)
     fetch('http://192.168.0.106:3001/transcribe', {
       method: 'POST',
-      body: formData,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ audioBase64 }),
     })
       .then(async response => {
+        if (!response.ok) {
+          throw new Error(`Server error: ${response.status}`);
+        }
         console.log('Server response status:', response.status);
         const responseText = await response.text();
         console.log('Server response text:', responseText);
@@ -128,6 +121,49 @@ export function useAudioRecording() {
   };
   
   
+
+
+  // function base64ToBlob(encodedData, mimeType) {
+  //   const byteCharacters = base64.decode(encodedData);
+  //   const byteArrays = [];
+
+  //   for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+  //     const slice = byteCharacters.slice(offset, offset + 512);
+  //     const byteNumbers = new Array(slice.length);
+
+  //     for (let i = 0; i < slice.length; i++) {
+  //       byteNumbers[i] = slice.charCodeAt(i);
+  //     }
+
+  //     const byteArray = new Uint8Array(byteNumbers);
+  //     byteArrays.push(byteArray);
+  //   }
+
+  //   return new Blob(byteArrays, { type: mimeType });
+  // }
+
+  
+  // const transcribeRecording = async (uri) => {
+  //   const formData = new FormData();
+  //   formData.append('file', {
+  //     uri: Platform.OS === 'android' ? uri : uri.replace('file://', ''),
+  //     name: 'audio.m4a',
+  //     type: 'audio/m4a',
+  //   });
+  
+  //   fetch('http://192.168.0.106:3001/transcribe', {
+  //     method: 'POST',
+  //     body: formData,
+  //   })
+  //     .then(async response => {
+  //       console.log('Server response status:', response.status);
+  //       const responseText = await response.text();
+  //       console.log('Server response text:', responseText);
+  //       return JSON.parse(responseText);
+  //     })
+  //     .then(data => console.log(data.transcription))
+  //     .catch(error => console.error('audioRecording.js', error));
+  // };
   
 
   return { startRecording, stopRecording, getDurationFormatted, getRecordingLines, transcribeRecording };
