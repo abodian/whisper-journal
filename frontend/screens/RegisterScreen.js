@@ -19,7 +19,7 @@ export default function RegisterScreen({ navigation }) {
 
   const createAccount = async () => {
     try {
-      const response = await fetch('http://192.168.0.106:3001/users', {
+      const response = await fetch('https://whisper-journal1.onrender.com/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
