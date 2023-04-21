@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const AddEntry = ({ selectedDate, setSelectedDate }) => {
+const AddEntry = ({ selectedDate, setSelectedDate, transcription }) => {
     const [isTitleFocused, setIsTitleFocused] = useState(false);
     const [isDiaryEntryFocused, setIsDiaryEntryFocused] = useState(false);
     const [title, setTitle] = useState('');
-    const [diaryEntry, setDiaryEntry] = useState('');
+    const [diaryEntry, setDiaryEntry] = useState(transcription || '');
     const navigation = useNavigation();
+
+    useEffect(() => {
+      setDiaryEntry(transcription || '');
+  }, [transcription]);
 
     const handleAddEntry = () => {
     const data = {
