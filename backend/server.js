@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const EntryController = require("./controllers/entry");
 const AnalysisController = require("./controllers/analyse");
 const TranscribeController = require("./controllers/transcribe");
+const UsersController = require("./controllers/user");
 const cors = require("cors");
 server.use(cors());
 
@@ -33,6 +34,8 @@ server.post("/entry", EntryController.Create);
 
 server.post("/analyse", AnalysisController.Analyse);
 server.post("/transcribe", TranscribeController.Transcribe);
+server.post("/users", UsersController.Create);
+
 
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
