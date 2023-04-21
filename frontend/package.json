@@ -22,6 +22,7 @@
     "expo-permissions": "^14.1.1",
     "expo-status-bar": "~1.4.4",
     "firebase": "^9.19.1",
+    "fs": "^0.0.1-security",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.2",
