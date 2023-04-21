@@ -100,7 +100,7 @@ export function useAudioRecording() {
 
   const transcribeRecording = async (audioBase64) => {
     try {
-      const response = await fetch('http://192.168.0.106:3001/transcribe', {
+      const response = await fetch('https://whisper-journal1.onrender.com/transcribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
