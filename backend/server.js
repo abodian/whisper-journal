@@ -4,6 +4,9 @@ const port = process.env.PORT || 3001;
 const mongoose = require("mongoose");
 const EntryController = require("./controllers/entry");
 const AnalysisController = require("./controllers/analyse");
+const UsersController = require("./controllers/user");
+const cors = require("cors");
+server.use(cors());
 
 mongoose
   .connect(
@@ -28,9 +31,10 @@ server.get("/", (req, res) => {
 
 server.post("/entry", EntryController.Create);
 
+server.post("/analyse", AnalysisController.Analyse);
 
-server.post('/analyse', AnalysisController.Analyse);
-
+server.post("/users", UsersController.Create);
+// server.post("/users/firebase", UsersController.FirebaseUserCreation);
 
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);

@@ -16,9 +16,11 @@
     "expo": "~48.0.10",
     "expo-application": "~5.1.1",
     "expo-av": "^13.2.1",
+    "expo-file-system": "~15.2.2",
     "expo-permissions": "^14.1.1",
     "expo-status-bar": "~1.4.4",
     "firebase": "^9.19.1",
+    "fs": "^0.0.1-security",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.2",
@@ -37,8 +39,7 @@
     "react-native-web": "~0.18.10",
     "react-router-dom": "^6.10.0",
     "tailwindcss": "^3.3.1",
-    "twrnc": "^3.6.0",
-    "expo-file-system": "~15.2.2"
+    "twrnc": "^3.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
