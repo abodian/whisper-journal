@@ -7,7 +7,7 @@ import BackButton from "../components/BackButton";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAudioRecording } from '../core/audioRecording';
 import { Audio } from 'expo-av';
-
+import { readFileAsBase64 } from '../logic/readFileAsBase64';
 
 const { width, height } = Dimensions.get('window');
 const aspectRatio = width / height;
@@ -19,12 +19,14 @@ function SingleEntry({ navigation }) {
   const { date } = route.params;
   const [selectedDate, setSelectedDate] = useState(date);
   const [isRecording, setIsRecording] = useState(false);
-  const { startRecording, stopRecording } = useAudioRecording();
+  const { startRecording, stopRecording, transcribeRecording } = useAudioRecording();
   const [sound, setSound] = useState(null);
+  const [transcription, setTranscription] = useState([])
 
-  async function playRecording(recordings) {
+  // this is just for testing purposes
+  async function playRecording(uri) {
     const { sound: newSound } = await Audio.Sound.createAsync(
-      { recordings },
+      { uri },
       {},
       null,
       false
@@ -45,15 +47,20 @@ function SingleEntry({ navigation }) {
     if (!isRecording) {
       await startRecording();
     } else {
-      const recordings = await stopRecording();
-      if (recordings) {
+      const uri = await stopRecording();
+      if (uri) {
         console.log('Recorded audio file URI:', uri);
-        playRecording(recordings.sound)
+        playRecording(uri)
+        const base64Audio = await readFileAsBase64(uri)
+        const audioTranscription = await transcribeRecording(base64Audio) // await for the promise to resolve
+        console.log('this is microphone function', audioTranscription)
+        setTranscription(audioTranscription) // set the transcription state
       }
     }
     setIsRecording(!isRecording);
+    console.log('setTranscription', transcription)
   };
-  
+
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -72,7 +79,7 @@ function SingleEntry({ navigation }) {
           You are adding entry for <FormattedDate date={date} />
         </Text>
         <Text>Press the microphone button to add your entry!</Text>
-        <AddEntry selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+        <AddEntry selectedDate={selectedDate} setSelectedDate={setSelectedDate} transcription={transcription} />
       </View>
       <View style={styles.microphone}>
         <Icon.Button
