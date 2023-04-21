@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const EntryController = require("./controllers/entry");
 const AnalysisController = require("./controllers/analyse");
 const TranscribeController = require("./controllers/transcribe");
+const cors = require("cors");
+server.use(cors());
 
 mongoose
   .connect(
@@ -30,11 +32,7 @@ server.get("/", (req, res) => {
 server.post("/entry", EntryController.Create);
 
 server.post("/analyse", AnalysisController.Analyse);
-server.post(
-  "/transcribe",
-  TranscribeController.upload,
-  TranscribeController.Transcribe
-);
+server.post("/transcribe", TranscribeController.Transcribe);
 
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
