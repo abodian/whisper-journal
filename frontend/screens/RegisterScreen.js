@@ -17,6 +17,47 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
+
+  // const createAccount = async () => {
+  //   try {
+  //     // Sign up the user using Firebase
+  //     const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
+  //     const { user } = userCredential;
+  
+  //     // Call your server API to store the user's name and email in MongoDB
+  //     const response = await fetch('http://localhost:3001/users', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         name: name.value,
+  //         email: email.value,
+  //         password: password.value,
+  //         firebaseUid: user.uid
+  //       })
+  //     });
+  //     if (response.ok) {
+  //       console.log('User created successfully!');
+  //       // Reset navigation to dashboard
+  //       // navigation.reset({
+  //       //   index: 0,
+  //       //   routes: [{ name: "Dashboard" }],
+  //       // });
+  //     } else {
+  //       throw new Error('There was a problem creating the user.');
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     setEmail({ ...email, error: "There was a problem creating your account" });
+  //     setPassword({ ...password, error: "There was a problem creating your account" });
+  //   }
+  // };
+  
+
+  
+
+  // Original : 
   const createAccount = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email.value, password.value);
