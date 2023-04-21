@@ -9,22 +9,38 @@ import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
+
   const createAccount = async () => {
     try {
-      await createUserWithEmailAndPassword(auth, email.value, password.value);
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "Dashboard" }],
+      const response = await fetch('https://whisper-journal1.onrender.com/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: name.value,
+          email: email.value,
+          password: password.value
+        })
       });
-    } catch (e) {
+      if (response.ok) {
+        console.log('User created successfully!');
+        navigation.reset({
+          index: 0,
+          routes: [{ name: "Dashboard" }],
+        });
+      } else {
+        throw new Error('There was a problem creating the user.');
+      }
+    } catch (error) {
+      console.error(error);
       setEmail({ ...email, error: "There was a problem creating your account" });
       setPassword({ ...password, error: "There was a problem creating your account" });
     }
