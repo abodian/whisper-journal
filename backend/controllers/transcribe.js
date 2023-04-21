@@ -70,6 +70,22 @@ const TranscribeController = {
         transcription: transcription,
         audioFileName: outputFileName,
       });
+
+      fs.unlink(tempFileName, (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(`Deleted ${tempFileName}`);
+        }
+      });
+
+      fs.unlink(outputFileName, (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(`Deleted ${outputFileName}`);
+        }
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Internal server error" });
