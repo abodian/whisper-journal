@@ -19,6 +19,7 @@
     "mongoose": "^7.0.3",
     "multer": "^1.4.5-lts.1",
     "openai": "^3.2.1",
+    "react-native-base64": "^0.2.1",
     "supertest": "^6.3.3",
     "uuid": "^9.0.0"
   }

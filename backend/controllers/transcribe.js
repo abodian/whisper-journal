@@ -62,8 +62,8 @@ const TranscribeController = {
       await convertInternal(tempFileName, sampleRate, outputFileName);
 
       const transcription = await chatGPTTranscribe(`./${outputFileName}`);
-      // const storedAnalysis = new Transcription({ result: transcription });
-      // await storedAnalysis.save();
+      const storedAnalysis = new Transcription({ result: transcription });
+      await storedAnalysis.save();
       console.log(transcription);
       res.send({
         type: "POST",
