@@ -60,6 +60,7 @@ const AddEntry = ({ selectedDate, setSelectedDate, transcription }) => {
           onChangeText={(text) => setDiaryEntry(text)}
           onFocus={() => setIsDiaryEntryFocused(true)}
           onBlur={() => setIsDiaryEntryFocused(false)}
+          multiline={true}  
         />
         <View style={styles.buttonContainer}>
           <Button title="Add Entry" onPress={handleAddEntry} />
