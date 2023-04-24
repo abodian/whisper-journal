@@ -29,7 +29,8 @@ const AnalysedEntry = ({ diaryEntry }) => {
 
   return (
     <View>
-      <Text>{analysis}</Text>
+      <Text>Analysis</Text>
+      <Text>Analysis{analysis}</Text>
     </View>
   );
 };

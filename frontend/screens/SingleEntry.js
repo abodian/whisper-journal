@@ -8,18 +8,17 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAudioRecording } from '../core/audioRecording';
 import { Audio } from 'expo-av';
 import { readFileAsBase64 } from '../logic/readFileAsBase64';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const { width, height } = Dimensions.get('window');
 const aspectRatio = width / height;
 const dateHeight = aspectRatio >= 0.75 ? height * 0.4 : height * 0.3;
 const addEntryHeight = (height - dateHeight) / 2;
 
-function SingleEntry({ navigation }) {
-  const token =  AsyncStorage.getItem('token');
+function SingleEntry({ navigation, date: propDate }) {
   const route = useRoute();
-  const { date } = route.params;
-  const [selectedDate, setSelectedDate] = useState(date);
+  const routeDate = route.params && route.params.date;
+  const selectedDate = propDate && propDate !== '' ? propDate : routeDate;
   const [isRecording, setIsRecording] = useState(false);
   const { startRecording, stopRecording, transcribeRecording } = useAudioRecording();
   const [sound, setSound] = useState(null);
@@ -78,10 +77,10 @@ function SingleEntry({ navigation }) {
             marginBottom: 20,
           }}
         >
-          You are adding entry for <FormattedDate date={date} />
+          You are adding entry for <FormattedDate date={selectedDate} />
         </Text>
         <Text>Press the microphone button to add your entry!</Text>
-        <AddEntry selectedDate={selectedDate} setSelectedDate={setSelectedDate} transcription={transcription} />
+        <AddEntry selectedDate={selectedDate} transcription={transcription} />
       </View>
       <View style={styles.microphone}>
         <Icon.Button
