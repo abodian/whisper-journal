@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAudioRecording } from '../core/audioRecording';
 import { Audio } from 'expo-av';
 import { readFileAsBase64 } from '../logic/readFileAsBase64';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
 const aspectRatio = width / height;
@@ -15,6 +16,8 @@ const dateHeight = aspectRatio >= 0.75 ? height * 0.4 : height * 0.3;
 const addEntryHeight = (height - dateHeight) / 2;
 
 function SingleEntry({ navigation }) {
+  const token =  AsyncStorage.getItem('token');
+  console.log('token',token);
   const route = useRoute();
   const { date } = route.params;
   const [selectedDate, setSelectedDate] = useState(date);
