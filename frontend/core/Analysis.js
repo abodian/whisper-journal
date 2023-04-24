@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Title } from 'react-native-paper';
 
 const AnalysedEntry = ({ diaryEntry }) => {
   console.log('diaryEntry first:', diaryEntry)
-  const [analysis, setAnalysis] = useState('');
+  const [analysis, setAnalysis] = useState('Loading analysis...');
 
   useEffect(() => {
     const fetchData = () => {
+      setAnalysis('Loading analysis...'); 
       fetch('https://whisper-journal1.onrender.com/analyse', {
         method: 'POST',
         headers: {
@@ -20,6 +22,7 @@ const AnalysedEntry = ({ diaryEntry }) => {
         })
         .catch(error => {
           console.error(error);
+          setAnalysis('Error fetching data'); // set error message on catch
         });
     };
   
@@ -28,11 +31,31 @@ const AnalysedEntry = ({ diaryEntry }) => {
 
 
   return (
-    <View>
-      <Text>Analysis</Text>
-      <Text>Analysis{analysis}</Text>
+    <View >
+      <Title style={styles.title}>Your Diary Entry Analysis</Title>
+      <Text style={styles.container}>{analysis}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  title: {
+    marginTop: 5,
+    alignSelf: 'center',
+    width: 330,
+    height: 40,
+    textAlign: 'center',
+    fontSize: 15,
+    lineHeight: 40,
+    marginBottom: 10,
+    fontSize: 20
+  },
+  container: {
+    alignSelf: 'center',
+    textAlign: 'center',
+    fontSize: 15,
+    paddingBottom: 20
+  },
+})
 
 export default AnalysedEntry;
