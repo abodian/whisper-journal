@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import AnalysedEntry from '../core/Analysis';
 
 
 const AnalysisScreen = ({ route }) => {
-  const { diaryEntry } = route.params;
+  // const { diaryEntry } = route.params;
 
   return (
     <View style={styles.container}>
-      <AnalysedEntry diaryEntry={diaryEntry} />
+      {/* <AnalysedEntry diaryEntry={diaryEntry} /> */}
+      <Text>Analysis Screen</Text>
     </View>
   );
 };

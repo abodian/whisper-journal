@@ -6,16 +6,24 @@ import EntryCalendar from '../components/Calendar';
 import WeeklySummary from '../components/WeeklySummary';
 import SelectedDaySummary from '../components/SelectedDaySummary';
 import SettingsScreen from './SettingsScreen';
+import AnalysisScreen from './AnalysisScreen'
+import SingleEntry from './SingleEntry'
 
 export default function Dashboard({ navigation }) {
+  const today = new Date();
+  const dateString = today.toISOString().split('T')[0]; // format as "YYYY-MM-DD"
+
   return (
-    <BottomNavigator Home={Home} Settings={Settings} SingleEntry={SingleEntryNavigator}/>
+    <BottomNavigator
+      Home={() => <Home navigation={navigation} />}
+      Settings={() => <Settings navigation={navigation} />}
+      SingleEntry={() => <SingleEntry navigation={navigation} date={dateString} />}
+      AnalysisScreen={() => <AnalysisScreen navigation={navigation} />}
+    />
   )  
 }
 
-function Home() {
-  const navigation = useNavigation();
-
+function Home({ navigation }) {
   const handleDayPress = (day) => {
     navigation.navigate('SingleEntry', { date: day.dateString });
   }
@@ -35,19 +43,24 @@ function Home() {
   );
 }
 
-function SingleEntryNavigator() {
-  const navigation = useNavigation();
+function SingleEntryNavigator(navigation) {
   const today = new Date();
   const dateString = today.toISOString().split('T')[0]; // format as "YYYY-MM-DD"
   navigation.navigate('SingleEntry', { date: dateString });
 }
 
-function Settings() {
-  const navigation = useNavigation();
+function AnalysisNavigator(navigation) {
+  return (
+  <AnalysisScreen />
+  )
+}
+
+function Settings({ navigation }) {
   return (
     <SettingsScreen />
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
