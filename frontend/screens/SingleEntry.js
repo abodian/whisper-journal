@@ -21,7 +21,7 @@ function SingleEntry({ navigation, date: propDate }) {
   const [isRecording, setIsRecording] = useState(false);
   const { startRecording, stopRecording, transcribeRecording } = useAudioRecording();
   const [sound, setSound] = useState(null);
-  const [transcription, setTranscription] = useState([])
+  const [transcription, setTranscription] = useState('')
 
   // this is just for testing purposes
   async function playRecording(uri) {
