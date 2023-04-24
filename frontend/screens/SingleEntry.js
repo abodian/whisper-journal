@@ -1,5 +1,5 @@
 import { useRoute } from '@react-navigation/native';
-import { View, StyleSheet, Dimensions, Text, KeyboardAvoidingView } from 'react-native';
+import { View, StyleSheet, Dimensions, Text, Keyboard, Platform } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import FormattedDate from '../components/Date';
 import AddEntry from '../core/AddEntry';
@@ -21,7 +21,29 @@ function SingleEntry({ navigation, date: propDate }) {
   const [isRecording, setIsRecording] = useState(false);
   const { startRecording, stopRecording, transcribeRecording } = useAudioRecording();
   const [sound, setSound] = useState(null);
-  const [transcription, setTranscription] = useState('')
+  const [transcription, setTranscription] = useState('');
+  const [keyboardShown, setKeyboardShown] = useState(false);
+  const [buttonColor, setButtonColor] = useState('black');
+
+  // hides microphone when keyboard is open
+  useEffect(() => {
+    const showListener = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+      () => {
+        setKeyboardShown(true);
+      }
+    );
+    const hideListener = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+      () => {
+        setKeyboardShown(false);
+      }
+    );
+    return () => {
+      showListener.remove();
+      hideListener.remove();
+    };
+  }, []);
 
   // this is just for testing purposes
   async function playRecording(uri) {
@@ -35,35 +57,33 @@ function SingleEntry({ navigation, date: propDate }) {
     await newSound.playAsync();
   }
 
-  useEffect(() => {
-    return () => {
-      if (sound) {
-        sound.unloadAsync();
-      }
-    };
-  }, [sound]);
-
+  // sets and stops recording, also handles colour change
   const handleMicrophonePress = async () => {
     if (!isRecording) {
       await startRecording();
+      setIsRecording(true);
+      setButtonColor('red'); 
     } else {
+      // Disable the button while the stopRecording() method is running
+      setButtonColor('gray');
       const uri = await stopRecording();
       if (uri) {
         console.log('Recorded audio file URI:', uri);
-        playRecording(uri)
-        const base64Audio = await readFileAsBase64(uri)
-        const audioTranscription = await transcribeRecording(base64Audio) // await for the promise to resolve
-        console.log('this is microphone function', audioTranscription)
-        setTranscription(audioTranscription) // set the transcription state
+        playRecording(uri);
+        const base64Audio = await readFileAsBase64(uri);
+        const audioTranscription = await transcribeRecording(base64Audio);
+        console.log('this is microphone function', audioTranscription);
+        setTranscription(audioTranscription);
       }
+      setIsRecording(false);
+      setButtonColor('black'); 
     }
-    setIsRecording(!isRecording);
-    console.log('setTranscription', transcription)
+    console.log('setTranscription', transcription);
   };
 
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <View style={styles.container}>
       <BackButton goBack={navigation.goBack} />
       <View style={styles.userInputContainer}>
         <Text
@@ -80,17 +100,22 @@ function SingleEntry({ navigation, date: propDate }) {
         </Text>
         <Text>Press the microphone button to add your entry!</Text>
         <AddEntry selectedDate={selectedDate} transcription={transcription} />
+
+        {!keyboardShown && (
+          <View style={styles.microphone}>
+          <Icon.Button
+            name="microphone"
+            size={120}
+            color={buttonColor} // use the new state variable to set the button color
+            backgroundColor="transparent"
+            onPress={handleMicrophonePress}
+            disabled={buttonColor === 'gray'} // disable the button when it's gray
+          />
+          </View>
+        )}
+
       </View>
-      <View style={styles.microphone}>
-        <Icon.Button
-          name="microphone"
-          size={120}
-          color={isRecording ? 'red' : 'black'}
-          backgroundColor="transparent"
-          onPress={handleMicrophonePress}
-        />
-      </View>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -124,3 +149,4 @@ const styles = StyleSheet.create({
 });
 
 export default SingleEntry;
+
