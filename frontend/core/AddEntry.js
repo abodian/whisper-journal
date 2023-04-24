@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddEntry = ({ selectedDate, setSelectedDate, transcription }) => {
     const [isTitleFocused, setIsTitleFocused] = useState(false);
@@ -14,6 +15,7 @@ const AddEntry = ({ selectedDate, setSelectedDate, transcription }) => {
   }, [transcription]);
 
     const handleAddEntry = () => {
+      const token =  AsyncStorage.getItem('token');
     const data = {
         title: title,
         diaryEntry: diaryEntry,
@@ -23,6 +25,7 @@ const AddEntry = ({ selectedDate, setSelectedDate, transcription }) => {
     fetch('https://whisper-journal1.onrender.com/entry', {
         method: 'POST',
         headers: {
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
     },
         body: JSON.stringify(data),

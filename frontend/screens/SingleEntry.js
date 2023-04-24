@@ -17,7 +17,6 @@ const addEntryHeight = (height - dateHeight) / 2;
 
 function SingleEntry({ navigation }) {
   const token =  AsyncStorage.getItem('token');
-  console.log('token',token);
   const route = useRoute();
   const { date } = route.params;
   const [selectedDate, setSelectedDate] = useState(date);
