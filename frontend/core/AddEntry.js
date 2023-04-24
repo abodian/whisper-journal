@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const AddEntry = ({ selectedDate, setSelectedDate, transcription }) => {
+const AddEntry = ({ selectedDate, transcription }) => {
     const [isTitleFocused, setIsTitleFocused] = useState(false);
     const [isDiaryEntryFocused, setIsDiaryEntryFocused] = useState(false);
     const [title, setTitle] = useState('');
@@ -20,6 +20,7 @@ const AddEntry = ({ selectedDate, setSelectedDate, transcription }) => {
         date: selectedDate,
     };
 
+    // fetch('http://192.168.0.106:3001/entry', {
     fetch('https://whisper-journal1.onrender.com/entry', {
         method: 'POST',
         headers: {
@@ -29,12 +30,12 @@ const AddEntry = ({ selectedDate, setSelectedDate, transcription }) => {
     })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data)
         // handle successful response from server
         console.log('Entry created successfully!');
         setTitle('');
         setIsDiaryEntryFocused('');
-        setSelectedDate('');
-        navigation.navigate('AnalysisScreen', { diaryEntry: diaryEntry });
+        navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry });
     })
         .catch((error) => {
         // handle error
