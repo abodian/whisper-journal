@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./user')
 
 const AnalysisSchema = new mongoose.Schema({
   result: { type: String, required: true },
