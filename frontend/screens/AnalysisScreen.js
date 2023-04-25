@@ -6,7 +6,7 @@ import AnalysedEntry from '../core/Analysis';
 
 const AnalysisScreen = ({ route }) => {
   // const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
-  const { title, diaryEntry } = route.params;
+  const { title, diaryEntry, userId } = route.params;
 
   return (
     <View style={styles.container}>
@@ -19,7 +19,7 @@ const AnalysisScreen = ({ route }) => {
         <Text style={{textAlign: 'center', marginTop: 20}}>{diaryEntry}</Text>
       </ScrollView>
       <ScrollView style={styles.analysisContainer}>
-        <AnalysedEntry diaryEntry={diaryEntry}/>
+        <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/>
       </ScrollView>
     </View>
   );
