@@ -4,40 +4,33 @@ import { Title } from 'react-native-paper';
 
 
 const AnalysedEntry = ({ diaryEntry, userId }) => {
+  console.log('diaryEntry first:', diaryEntry)
+  console.log('userId:', userId)
   const [analysis, setAnalysis] = useState('Loading analysis...');
-  console.log('user', userId)
-
+//https://whisper-journal1.onrender.com
   useEffect(() => {
-    const fetchData = async () => {
-      setAnalysis('Loading analysis...');
-  
-      try {
-        // Send request to server to get analysis result
-        const response = await fetch('https://whisper-journal1.onrender.com/analyse', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ prompt: diaryEntry, userId: userId }),
-        });
-  
-        const data = await response.json();
-  
-        // Store analysis result in the Analysis collection only if the userId is available
-        if (userId) {
-
-          setAnalysis(data.analysis);
-        }
-  
+    const fetchData = () => {
+      setAnalysis('Loading analysis...'); 
+      fetch('http://192.168.1.197:3001/analyse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: diaryEntry, userId: userId }),
         
-      } catch (error) {
-        console.error(error);
-        setAnalysis('Error fetching data'); // set error message on catch
-      }
+      })
+        .then(response => response.json())
+        .then(data => {
+          setAnalysis(data.analysis);
+        })
+        .catch(error => {
+          console.error(error);
+          setAnalysis('Error fetching data'); // set error message on catch
+        });
     };
   
     fetchData();
-  }, [diaryEntry, userId]);
+  }, [diaryEntry]);
 
   return (
     <View >
