@@ -11,7 +11,6 @@ import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export default function LoginScreen({ navigation }) {
@@ -33,33 +32,29 @@ export default function LoginScreen({ navigation }) {
     };
   }, [navigation]);
 
-  
-const loginUser = async () => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value); 
-    const emailToken = { email: userCredential.user.email }; //sotre only users email in the token, security reasons 
-    const token = JSON.stringify(emailToken);
-    await AsyncStorage.setItem('token', token); // Store the token in AsyncStorage
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Dashboard" }],
-    });
-  } catch (error) {
-    let errorMessage = "";
-    if (
-      error.code === "auth/invalid-email" ||
-      error.code === "auth/wrong-password"
-    ) {
-      errorMessage = "Your email or password was incorrect";
-    } else if (error.code === "auth/email-already-in-use") {
-      errorMessage = "An account with this email already exists";
-    } else {
-      errorMessage = "There was a problem with your request";
+  const loginUser = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email.value, password.value);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Dashboard" }],
+      });
+    } catch (error) {
+      let errorMessage = "";
+      if (
+        error.code === "auth/invalid-email" ||
+        error.code === "auth/wrong-password"
+      ) {
+        errorMessage = "Your email or password was incorrect";
+      } else if (error.code === "auth/email-already-in-use") {
+        errorMessage = "An account with this email already exists";
+      } else {
+        errorMessage = "There was a problem with your request";
+      }
+      setEmail({ ...email, error: errorMessage });
+      setPassword({ ...password, error: errorMessage });
     }
-    setEmail({ ...email, error: errorMessage });
-    setPassword({ ...password, error: errorMessage });
-  }
-};
+  };
 
   return (
     <Background>

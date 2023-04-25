@@ -9,7 +9,6 @@ import { useAudioRecording } from '../core/audioRecording';
 import { Audio } from 'expo-av';
 import { readFileAsBase64 } from '../logic/readFileAsBase64';
 
-
 const { width, height } = Dimensions.get('window');
 const aspectRatio = width / height;
 const dateHeight = aspectRatio >= 0.75 ? height * 0.4 : height * 0.3;
