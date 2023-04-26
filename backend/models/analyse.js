@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const User = require('./user')
 
 const AnalysisSchema = new mongoose.Schema({
-  entryId: { type: mongoose.Schema.Types.ObjectId, required: false, ref: 'Entry' },
   result: { type: String, required: true },
-  date: { type: Date, default: Date.now }
+  date: { type: Date, default: Date.now },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 const Analysis = mongoose.model('Analysis', AnalysisSchema, 'Analysis');

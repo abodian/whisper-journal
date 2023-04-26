@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Title } from 'react-native-paper';
 
-const AnalysedEntry = ({ diaryEntry }) => {
-  console.log('diaryEntry first:', diaryEntry)
-  const [analysis, setAnalysis] = useState('Loading analysis...');
 
+const AnalysedEntry = ({ diaryEntry, userId }) => {
+  console.log('diaryEntry first:', diaryEntry)
+  console.log('userId:', userId)
+  const [analysis, setAnalysis] = useState('Loading analysis...');
   useEffect(() => {
     const fetchData = () => {
       setAnalysis('Loading analysis...'); 
@@ -14,7 +15,8 @@ const AnalysedEntry = ({ diaryEntry }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: diaryEntry }),
+        body: JSON.stringify({ prompt: diaryEntry, userId: userId }),
+        
       })
         .then(response => response.json())
         .then(data => {
@@ -28,7 +30,6 @@ const AnalysedEntry = ({ diaryEntry }) => {
   
     fetchData();
   }, [diaryEntry]);
-
 
   return (
     <View >
