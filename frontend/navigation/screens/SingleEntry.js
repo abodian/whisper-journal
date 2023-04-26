@@ -1,9 +1,9 @@
 import { useRoute } from '@react-navigation/native';
-import { View, StyleSheet, Dimensions, Text, Keyboard, Platform } from 'react-native';
+import { View, StyleSheet, Dimensions, Text, Keyboard, Platform, TouchableOpacity, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import FormattedDate from '../../components/Date';
 import AddEntry from '../../core/AddEntry';
-import BackButton from "../../components/BackButton";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAudioRecording } from '../../core/audioRecording';
 import { Audio } from 'expo-av';
@@ -12,9 +12,9 @@ import { readFileAsBase64 } from '../../logic/readFileAsBase64';
 const { width, height } = Dimensions.get('window');
 const aspectRatio = width / height;
 const dateHeight = aspectRatio >= 0.75 ? height * 0.4 : height * 0.3;
-const addEntryHeight = (height - dateHeight) / 2;
 
-const SingleEntry = ({ navigation, date: propDate }) => {
+const SingleEntry = ({ date: propDate }) => {
+  const navigation = useNavigation();
   const route = useRoute();
   const routeDate = route.params && route.params.date;
   const selectedDate = propDate && propDate !== '' ? propDate : routeDate;
@@ -44,6 +44,10 @@ const SingleEntry = ({ navigation, date: propDate }) => {
       hideListener.remove();
     };
   }, []);
+
+  const handleGoHome = () => {
+    navigation.navigate('Home')
+  }
 
   // this is just for testing purposes
   async function playRecording(uri) {
@@ -84,7 +88,6 @@ const SingleEntry = ({ navigation, date: propDate }) => {
 
   return (
     <View style={styles.container}>
-      <BackButton goBack={navigation.goBack} />
       <View style={styles.userInputContainer}>
         <Text
           style={{
@@ -113,8 +116,16 @@ const SingleEntry = ({ navigation, date: propDate }) => {
           />
           </View>
         )}
-
+            
       </View>
+      {!keyboardShown && (
+      <TouchableOpacity onPress={handleGoHome} style={styles.backContainer}>
+          <Image
+            style={styles.image}
+            source={require('../../assets/arrow_back.png')}
+          />
+      </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -145,7 +156,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-  }
+  },
+  image: {
+    width: 24,
+    height: 24,
+  },
+  backContainer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+  },
 });
 
 export default SingleEntry;

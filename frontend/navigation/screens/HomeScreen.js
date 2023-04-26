@@ -3,13 +3,14 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import EntryCalendar from '../../components/Calendar';
 import WeeklySummary from '../../components/WeeklySummary';
 import SelectedDaySummary from '../../components/SelectedDaySummary';
+import { useNavigation } from '@react-navigation/native';
 
 
 const HomeScreen = ({ navigation }) => {
   const handleDayPress = (day) => {
     navigation.navigate('SingleEntry', { date: day.dateString });
   }
-
+  
   return (
     <ScrollView>
       <View style={styles.container}>
