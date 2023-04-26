@@ -12,7 +12,7 @@ import Button from "../components/Button";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../firebase";
 
-export default function ResetPasswordScreen({ navigation }) {
+const ResetPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [submitted, setSubmitted] = useState(false);
 
@@ -64,3 +64,5 @@ export default function ResetPasswordScreen({ navigation }) {
     </Background>
   );
 }
+
+export default ResetPasswordScreen
