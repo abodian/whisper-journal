@@ -34,7 +34,7 @@ const RegisterScreen = ({ navigation }) => {
         console.log('User created successfully!');
         navigation.reset({
           index: 0,
-          routes: [{ name: "Dashboard" }],
+          routes: [{ name: "MainContainer" }],
         });
       } else {
         throw new Error('There was a problem creating the user.');

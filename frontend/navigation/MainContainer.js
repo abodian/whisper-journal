@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './screens/HomeScreen'
 import SettingsScreen from './screens/SettingsScreen'
 import SingleEntry from './screens/SingleEntry'
+
+
 
 const homeName = 'Home';
 const settingsName = 'Settings'
@@ -12,12 +15,12 @@ const addEntryName = 'Add Entry'
 
 const Tab = createBottomTabNavigator();
 
+
 const MainContainer = () => {
   return (
     <Tab.Navigator
     initialRouteName={homeName}
     screenOptions={({ route }) => ({
-      headerShown:'false',
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
         let rn = route.name;
