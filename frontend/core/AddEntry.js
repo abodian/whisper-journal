@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { getAuth } from "firebase/auth";
 
@@ -11,14 +11,16 @@ const AddEntry = ({ selectedDate, transcription }) => {
     const navigation = useNavigation();
     const auth = getAuth();
     const user = auth.currentUser;
-    console.log('user', user)
+    // console.log('user', user)
     
 
     useEffect(() => {
       setDiaryEntry(transcription || '');
   }, [transcription]);
 
+
     const handleAddEntry = () => {
+    navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
     const data = {
         title: title,
         diaryEntry: diaryEntry,
@@ -72,6 +74,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
         <View style={styles.buttonContainer}>
           <Button title="Add Entry" onPress={handleAddEntry} />
         </View>
+
       </View>
 );
 }
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
       borderRadius: 20,
       overflow: 'hidden',
-    },
+    }
 });
 
 

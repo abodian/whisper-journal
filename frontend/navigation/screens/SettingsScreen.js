@@ -2,10 +2,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import Button from "../components/Button";
-import { auth } from "../firebase"
+import Button from "../../components/Button";
+import { auth } from "../../firebase"
 
-export default function SettingsScreen() {
+const SettingsScreen = () => {
   const navigation = useNavigation();
 
   const logout = async () => {
@@ -88,3 +88,5 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 });
+
+export default SettingsScreen

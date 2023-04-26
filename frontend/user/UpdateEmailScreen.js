@@ -10,7 +10,7 @@ import BackButton from "../components/BackButton";
 import { auth } from "../firebase";
 import { updateEmail } from "firebase/auth";
 
-export default function UpdateEmailScreen() {
+const UpdateEmailScreen = () => {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [confirmEmail, setConfirmEmail] = useState({ value: "", error: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -81,3 +81,5 @@ export default function UpdateEmailScreen() {
     </Background>
   );
 }
+
+export default UpdateEmailScreen

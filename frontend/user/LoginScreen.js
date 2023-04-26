@@ -13,7 +13,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
 
-export default function LoginScreen({ navigation }) {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
@@ -22,7 +22,7 @@ export default function LoginScreen({ navigation }) {
       if (user) {
         navigation.reset({
           index: 0,
-          routes: [{ name: "Dashboard" }],
+          routes: [{ name: "MainContainer" }],
         });
       }
     });
@@ -37,7 +37,7 @@ export default function LoginScreen({ navigation }) {
       await signInWithEmailAndPassword(auth, email.value, password.value);
       navigation.reset({
         index: 0,
-        routes: [{ name: "Dashboard" }],
+        routes: [{ name: "MainContainer" }],
       });
     } catch (error) {
       let errorMessage = "";
@@ -121,3 +121,5 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
   },
 });
+
+export default LoginScreen

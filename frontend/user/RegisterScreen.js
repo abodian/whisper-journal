@@ -11,7 +11,7 @@ import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 
 
-export default function RegisterScreen({ navigation }) {
+const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState({ value: "", error: "" });
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
@@ -34,7 +34,7 @@ export default function RegisterScreen({ navigation }) {
         console.log('User created successfully!');
         navigation.reset({
           index: 0,
-          routes: [{ name: "Dashboard" }],
+          routes: [{ name: "MainContainer" }],
         });
       } else {
         throw new Error('There was a problem creating the user.');
@@ -107,3 +107,5 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
   },
 });
+
+export default RegisterScreen
