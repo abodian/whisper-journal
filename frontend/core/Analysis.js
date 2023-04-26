@@ -7,11 +7,10 @@ const AnalysedEntry = ({ diaryEntry, userId }) => {
   console.log('diaryEntry first:', diaryEntry)
   console.log('userId:', userId)
   const [analysis, setAnalysis] = useState('Loading analysis...');
-//https://whisper-journal1.onrender.com
   useEffect(() => {
     const fetchData = () => {
       setAnalysis('Loading analysis...'); 
-      fetch('http://192.168.1.197:3001/analyse', {
+      fetch('https://whisper-journal1.onrender.com/analyse', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
