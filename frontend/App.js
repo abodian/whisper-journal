@@ -7,7 +7,9 @@ import MainContainer from './navigation/MainContainer'
 import StartScreen from './user/StartScreen'
 import LoginScreen from './user/LoginScreen'
 import RegisterScreen from './user/RegisterScreen'
-import ResetPasswordScreen from './user/StartScreen'
+import ResetPasswordScreen from './user/ResetPasswordScreen'
+import AboutScreen from './navigation/screens/AboutScreen'
+import UpdateEmailScreen from './user/UpdateEmailScreen'
 
 const Stack = createStackNavigator()
 
@@ -26,6 +28,8 @@ export default function App() {
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen}/>
           <Stack.Screen name="MainContainer" component={MainContainer} />
+          <Stack.Screen name="UpdateEmailScreen" component={UpdateEmailScreen} />
+          <Stack.Screen name="AboutScreen" component={AboutScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     // </Provider>
