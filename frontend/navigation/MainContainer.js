@@ -8,13 +8,11 @@ import SettingsScreen from './screens/SettingsScreen'
 import SingleEntry from './screens/SingleEntry'
 
 
-
 const homeName = 'Home';
 const settingsName = 'Settings'
 const addEntryName = 'Add Entry'
 
 const Tab = createBottomTabNavigator();
-
 
 const MainContainer = () => {
   return (
@@ -36,7 +34,7 @@ const MainContainer = () => {
     })}
     >
       <Tab.Screen name={homeName} component={HomeScreen} options={{ headerShown: false }} />
-      <Tab.Screen name={addEntryName} component={SingleEntry} options={{ headerShown: false }} />
+      <Tab.Screen name={addEntryName} component={SingleEntry} options={{ headerShown: false, tabBarVisible: false }}   initialParams={{ date: Date.now() }}  />
       <Tab.Screen name={settingsName} component={SettingsScreen} options={{ headerShown: false }} />
     </Tab.Navigator>
   )  

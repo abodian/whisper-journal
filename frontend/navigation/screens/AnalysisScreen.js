@@ -1,15 +1,28 @@
 import React from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Title } from 'react-native-paper';
 import AnalysedEntry from '../../core/Analysis';
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { useNavigation } from "@react-navigation/native";
 
 
 const AnalysisScreen = ({ route }) => {
   // const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
   const { title, diaryEntry, userId } = route.params;
+  const navigation = useNavigation();
+
+  const handleGoHome = () => {
+    navigation.navigate('Home')
+  }
 
   return (
     <View style={styles.container}>
+    <TouchableOpacity onPress={handleGoHome} style={styles.backContainer}>
+      <Image
+        style={styles.image}
+        source={require('../../assets/arrow_back.png')}
+      />
+    </TouchableOpacity>
       <View style={styles.titleContainer}>
         <Title style={styles.pageTitle}>Diary Entry Analysis</Title>
         <Title style={styles.entryTitle}>{title}</Title>
@@ -78,6 +91,15 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 40,
     marginBottom: 20
+  },
+  backContainer: {
+    position: 'absolute',
+    top: 10 + getStatusBarHeight(),
+    left: 4,
+  },
+  image: {
+    width: 24,
+    height: 24,
   },
 });
 
