@@ -3,24 +3,17 @@ import { Provider } from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import theme from './core/theme'
-import {
-  StartScreen,
-  LoginScreen,
-  RegisterScreen,
-  ResetPasswordScreen,
-  Dashboard,
-  SingleEntry,
-  SettingsScreen,
-  UpdateEmailScreen,
-  AboutScreen,
-  AnalysisScreen,
-} from './screens'
+import MainContainer from './navigation/MainContainer'
+import StartScreen from './user/StartScreen'
+import LoginScreen from './user/LoginScreen'
+import RegisterScreen from './user/RegisterScreen'
+import ResetPasswordScreen from './user/StartScreen'
 
 const Stack = createStackNavigator()
 
 export default function App() {
   return (
-    <Provider theme={theme}>
+    // <Provider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="StartScreen"
@@ -31,18 +24,10 @@ export default function App() {
           <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
-          <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen name="SingleEntry" component={SingleEntry} />
-          <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
-          <Stack.Screen name="UpdateEmailScreen" component={UpdateEmailScreen} />
-          <Stack.Screen name="AboutScreen" component={AboutScreen} />
-          <Stack.Screen name='AnalysisScreen' component={AnalysisScreen} />
-          <Stack.Screen
-            name="ResetPasswordScreen"
-            component={ResetPasswordScreen}
-          />
+          <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen}/>
+          <Stack.Screen name="MainContainer" component={MainContainer} />
         </Stack.Navigator>
       </NavigationContainer>
-    </Provider>
+    // </Provider>
   )
 }
