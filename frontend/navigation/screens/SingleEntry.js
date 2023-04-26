@@ -1,20 +1,20 @@
 import { useRoute } from '@react-navigation/native';
 import { View, StyleSheet, Dimensions, Text, Keyboard, Platform } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import FormattedDate from '../components/Date';
-import AddEntry from '../core/AddEntry';
-import BackButton from "../components/BackButton";
+import FormattedDate from '../../components/Date';
+import AddEntry from '../../core/AddEntry';
+import BackButton from "../../components/BackButton";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useAudioRecording } from '../core/audioRecording';
+import { useAudioRecording } from '../../core/audioRecording';
 import { Audio } from 'expo-av';
-import { readFileAsBase64 } from '../logic/readFileAsBase64';
+import { readFileAsBase64 } from '../../logic/readFileAsBase64';
 
 const { width, height } = Dimensions.get('window');
 const aspectRatio = width / height;
 const dateHeight = aspectRatio >= 0.75 ? height * 0.4 : height * 0.3;
 const addEntryHeight = (height - dateHeight) / 2;
 
-function SingleEntry({ navigation, date: propDate }) {
+const SingleEntry = ({ navigation, date: propDate }) => {
   const route = useRoute();
   const routeDate = route.params && route.params.date;
   const selectedDate = propDate && propDate !== '' ? propDate : routeDate;

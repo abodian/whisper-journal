@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import { Title } from 'react-native-paper';
-import AnalysedEntry from '../core/Analysis';
+import AnalysedEntry from '../../core/Analysis';
 
 
 const AnalysisScreen = ({ route }) => {
