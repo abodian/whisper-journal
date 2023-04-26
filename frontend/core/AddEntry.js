@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { getAuth } from "firebase/auth";
 
 const AddEntry = ({ selectedDate, transcription }) => {
     const [isTitleFocused, setIsTitleFocused] = useState(false);
@@ -8,6 +9,10 @@ const AddEntry = ({ selectedDate, transcription }) => {
     const [title, setTitle] = useState('');
     const [diaryEntry, setDiaryEntry] = useState(transcription || '');
     const navigation = useNavigation();
+    const auth = getAuth();
+    const user = auth.currentUser;
+    console.log('user', user)
+    
 
     useEffect(() => {
       setDiaryEntry(transcription || '');
@@ -18,6 +23,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
         title: title,
         diaryEntry: diaryEntry,
         date: selectedDate,
+        userId: user.uid
     };
 
     // fetch('http://192.168.0.106:3001/entry', {
@@ -35,7 +41,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
         console.log('Entry created successfully!');
         setTitle('');
         setIsDiaryEntryFocused('');
-        navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry });
+        navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
     })
         .catch((error) => {
         // handle error
