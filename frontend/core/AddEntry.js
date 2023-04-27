@@ -27,8 +27,8 @@ const AddEntry = ({ selectedDate, transcription }) => {
         date: selectedDate,
         userId: user.uid
     };
-
-    // fetch('http://192.168.0.106:3001/entry', {
+// 192.168.1.197 //mike
+    // fetch('http://192.168.0.106:3001/entry', { // alex
     fetch('https://whisper-journal1.onrender.com/entry', {
         method: 'POST',
         headers: {
