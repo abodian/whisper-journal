@@ -11,7 +11,6 @@ npm-debug.*
 *.orig.*
 web-build/
 .env
-whisper-journal-4ef93-firebase-adminsdk-xjbi8-f4a173182a.json
 # macOS
 .DS_Store
 
