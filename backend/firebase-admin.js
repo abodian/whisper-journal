@@ -1,6 +1,6 @@
 const admin = require("firebase-admin");
 
-const serviceAccount = require("./whisper-journal-4ef93-firebase-adminsdk-xjbi8-f4a173182a.json");
+const serviceAccount = require("./whisper-journal-4ef93-firebase-adminsdk-xjbi8-f4a173182a");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
