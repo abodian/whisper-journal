@@ -1,11 +1,10 @@
 const { Configuration, OpenAIApi } = require("openai");
+const { OPENAI_API_KEY } = process.env;
 
 class OpenAI {
   constructor(apiKey) {
     // Create the Configuration and OpenAIApi instances
-    this.openai = new OpenAIApi(
-      new Configuration("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")
-    );
+    this.openai = new OpenAIApi(new Configuration(`${OPENAI_API_KEY}`));
   }
   // Asynchronous function to generate text from the OpenAI API
   async generateText(prompt, model, max_tokens, temperature = 0.85) {
