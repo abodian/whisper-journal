@@ -22,14 +22,15 @@ const AddEntry = ({ selectedDate, transcription }) => {
     const handleAddEntry = () => {
     navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
     const data = {
+        _id: `${user.uid}_${selectedDate.toISOString()}`,
         title: title,
         diaryEntry: diaryEntry,
         date: selectedDate,
         userId: user.uid
     };
-
+//https://whisper-journal1.onrender.com
     // fetch('http://192.168.0.106:3001/entry', {
-    fetch('https://whisper-journal1.onrender.com/entry', {
+    fetch('http://localhost:3001/entry', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
