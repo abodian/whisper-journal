@@ -8,6 +8,16 @@ const TranscribeController = require("./controllers/transcribe");
 const UsersController = require("./controllers/user");
 const cors = require("cors");
 server.use(cors());
+require("dotenv").config();
+
+const whisperJournalSDK = require("./whisper-journal-4ef93-firebase-adminsdk-xjbi8-f4a173182a");
+
+// Use the configuration values
+whisperJournalSDK.private_key_id = process.env.PRIVATE_KEY_ID;
+whisperJournalSDK.private_key = process.env.PRIVATE_KEY;
+
+// Use the service account credentials
+// ...
 
 mongoose
   .connect(
@@ -35,7 +45,6 @@ server.post("/entry", EntryController.Create);
 server.post("/analyse", AnalysisController.Analyse);
 server.post("/transcribe", TranscribeController.Transcribe);
 server.post("/users", UsersController.Create);
-
 
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
