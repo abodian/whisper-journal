@@ -37,20 +37,28 @@ const AddEntry = ({ selectedDate, transcription }) => {
     },
         body: JSON.stringify(data),
     })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data)
-        // handle successful response from server
-        console.log('Entry created successfully!');
-        setTitle('');
-        setIsDiaryEntryFocused('');
-        navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
-    })
-        .catch((error) => {
-        // handle error
-        console.log('Error creating entry.');
-        console.error(error);
-    });
+    .then((response) => {
+      if (response.ok) {
+          return response.json();
+      } else {
+          throw new Error('Error creating entry.');
+      }
+  })
+  .then((data) => {
+      console.log(data);
+      console.log('Entry created successfully!');
+      setTitle('');
+      setIsDiaryEntryFocused('');
+      navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
+  })
+  .catch((error) => {
+      if (error.code === 11000) { //error code from mongoDC
+          console.log('Error creating entry: You have already created an entry for this day.'); 
+      } else {
+          console.log('Error creating entry.');
+          console.error(error);
+      }
+  });
 };
 
     return (

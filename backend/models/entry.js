@@ -8,6 +8,8 @@ const EntrySchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // add user reference
 });
 
+EntrySchema.index({ userId: 1, date: 1 }, { unique: true }); //before adding an entry it will check first that there is another entry with the same user id and date
+
 const Entry = mongoose.model("Entry", EntrySchema, "Diary");
 
 module.exports = Entry;
