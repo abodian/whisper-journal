@@ -1,8 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously } from "firebase/auth";
+import {FIREBASE_API_KEY} from "@env"
+console.log(FIREBASE_API_KEY)
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDbL_FWcTUjPzUaBK-Zeh3veyLhyDkPb5s",
+  apiKey: `${FIREBASE_API_KEY}`,
   authDomain: "whisper-journal-4ef93.firebaseapp.com",
   projectId: "whisper-journal-4ef93",
   storageBucket: "whisper-journal-4ef93.appspot.com",
