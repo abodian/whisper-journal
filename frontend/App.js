@@ -17,7 +17,7 @@ const Stack = createStackNavigator()
 
 export default function App() {
   return (
-    // <Provider theme={theme}>
+    <Provider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="StartScreen"
@@ -36,6 +36,6 @@ export default function App() {
           <Stack.Screen name="AnalysisScreen" component={AnalysisScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-    // </Provider>
+    </Provider>
   )
 }

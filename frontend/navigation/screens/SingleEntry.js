@@ -99,7 +99,7 @@ const SingleEntry = ({ date: propDate }) => {
             marginBottom: 20,
           }}
         >
-          You are adding entry for <FormattedDate date={selectedDate} />
+          You are adding an entry for <FormattedDate date={selectedDate} />
         </Text>
         <Text>Press the microphone button to add your entry!</Text>
         <AddEntry selectedDate={selectedDate} transcription={transcription} />

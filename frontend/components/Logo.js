@@ -1,14 +1,16 @@
-import React from 'react'
-import { Image, StyleSheet } from 'react-native'
+import React from 'react';
+import { StyleSheet } from 'react-native';
+import SvgUri from 'react-native-svg-uri';
+import logoSvg from '../assets/logo_quill.svg';
 
 export default function Logo() {
-  return <Image source={require('../assets/logo1.png')} style={styles.image} />
+  return <SvgUri source={logoSvg} style={styles.svg} />;
 }
 
 const styles = StyleSheet.create({
-  image: {
+  svg: {
     width: 110,
     height: 110,
     marginBottom: 8,
   },
-})
+});
