@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { Text } from "react-native-paper";
-import Background from "../components/Background";
+import BackgroundUserScreens from '../components/BackgroundUserScreens'
 import Logo from "../components/Logo";
 import Header from "../components/Header";
 import Button from "../components/Button";
@@ -36,7 +36,7 @@ const UpdateEmailScreen = () => {
   };
 
   return (
-    <Background>
+    <BackgroundUserScreens>
       <BackButton goBack={navigation.goBack} />
       <Logo />
       <Header>Update Email</Header>
@@ -78,7 +78,7 @@ const UpdateEmailScreen = () => {
           </Button>
         </>
       )}
-    </Background>
+    </BackgroundUserScreens>
   );
 }
 

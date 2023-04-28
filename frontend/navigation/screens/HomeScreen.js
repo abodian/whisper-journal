@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import EntryCalendar from '../../components/Calendar';
 import WeeklySummary from '../../components/WeeklySummary';
 import SelectedDaySummary from '../../components/SelectedDaySummary';
+import Background from '../../components/Background'
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -12,17 +13,19 @@ const HomeScreen = ({ navigation }) => {
   }
   
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.calendarContainer}>
-        <EntryCalendar onDayPress={handleDayPress} />
+    <Background>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.calendarContainer}>
+          <EntryCalendar onDayPress={handleDayPress} />
+          </View>
+          <View style={styles.summaryContainer}>
+            <WeeklySummary style={styles.weeklyContainer}/>
+            <SelectedDaySummary styles={styles.selectedDayContainer}/>
+          </View>
         </View>
-        <View style={styles.summaryContainer}>
-          <WeeklySummary style={styles.weeklyContainer}/>
-          <SelectedDaySummary styles={styles.selectedDayContainer}/>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </Background>
   );
 }
 

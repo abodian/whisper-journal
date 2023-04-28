@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import {
   Text,
 } from "react-native";
-import Background from "../components/Background";
+import BackgroundUserScreens from '../components/BackgroundUserScreens'
 import BackButton from "../components/BackButton";
 import Logo from "../components/Logo";
 import Header from "../components/Header";
@@ -31,7 +31,7 @@ const ResetPasswordScreen = ({ navigation }) => {
   };
 
   return (
-    <Background>
+    <BackgroundUserScreens>
       <BackButton goBack={navigation.goBack} />
       <Logo />
       <Header>Restore Password</Header>
@@ -61,7 +61,7 @@ const ResetPasswordScreen = ({ navigation }) => {
           </Button>
         </>
       )}
-    </Background>
+    </BackgroundUserScreens>
   );
 }
 

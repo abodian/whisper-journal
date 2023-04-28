@@ -1,20 +1,19 @@
 // first screen when starting app
 import React from 'react'
-import { StyleSheet } from "react-native";
-import Background from '../components/Background'
+import { StyleSheet } from 'react-native'
+import BackgroundUserScreens from '../components/BackgroundUserScreens'
 import Logo from '../components/Logo'
-import Header from '../components/Header'
 import Button from '../components/Button'
 import Paragraph from '../components/Paragraph'
 
 const StartScreen = ({ navigation }) => {
   return (
-    <Background>
+    <BackgroundUserScreens style={styles.container}>
       <Logo />
       {/* <Header>Whisper Journal</Header> */}
-      <Paragraph>
+      {/* <Paragraph>
         Hi, please login to your Whisper Journal account.
-      </Paragraph>
+      </Paragraph> */}
       <Button
         mode="contained"
         onPress={() => navigation.navigate('LoginScreen')}
@@ -27,10 +26,20 @@ const StartScreen = ({ navigation }) => {
       >
         Sign Up
       </Button>
-    </Background>
+    </BackgroundUserScreens>
   )
 }
 
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    width: '100%',
+    maxWidth: 340,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
 
 export default StartScreen

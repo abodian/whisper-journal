@@ -4,6 +4,7 @@ import { View, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import Button from "../../components/Button";
 import { auth } from "../../firebase"
+import Background from '../../components/Background'
 
 const SettingsScreen = () => {
   const navigation = useNavigation();
@@ -33,40 +34,42 @@ const SettingsScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.settingsContainer}>
-        <Button
-          mode="contained"
-          onPress={resetPasswordNavigator}
-          style={{marginTop: 100, width: 200}}
-        >
-          Change Password
-        </Button>
-        <Button
-          mode="contained"
-          onPress={updateEmailNavigator}
-          style={{marginTop: 5, width: 200}}
-        >
-          Change Email
-        </Button>
-        <Button
-          mode="contained"
-          onPress={aboutScreenNavigator}
-          style={{marginTop: 5, width: 200}}
-        >
-          About
-        </Button>
+    <Background>
+      <View style={styles.container}>
+        <View style={styles.settingsContainer}>
+          <Button
+            mode="contained"
+            onPress={resetPasswordNavigator}
+            style={{marginTop: 100, width: 200}}
+          >
+            Change Password
+          </Button>
+          <Button
+            mode="contained"
+            onPress={updateEmailNavigator}
+            style={{marginTop: 5, width: 200}}
+          >
+            Change Email
+          </Button>
+          <Button
+            mode="contained"
+            onPress={aboutScreenNavigator}
+            style={{marginTop: 5, width: 200}}
+          >
+            About
+          </Button>
+        </View>
+        <View style={styles.logoutContainer}>
+          <Button
+            mode="outlined"
+            onPress={logout}
+            style={{marginTop: 200 }}
+          >
+            Logout
+          </Button>
+        </View>
       </View>
-      <View style={styles.logoutContainer}>
-        <Button
-          mode="outlined"
-          onPress={logout}
-          style={{marginTop: 200 }}
-        >
-          Logout
-        </Button>
-      </View>
-    </View>
+    </Background>
   );
 }
 

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
-import Background from "../components/Background";
+import BackgroundUserScreens from '../components/BackgroundUserScreens'
 import Logo from "../components/Logo";
 import Header from "../components/Header";
 import Button from "../components/Button";
@@ -57,7 +57,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <Background>
+    <BackgroundUserScreens>
       <BackButton goBack={navigation.goBack} />
       <Logo />
       <Header>Welcome back.</Header>
@@ -98,7 +98,7 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
-    </Background>
+    </BackgroundUserScreens>
   );
 }
 

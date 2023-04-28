@@ -4,6 +4,7 @@ import { Title } from 'react-native-paper';
 import AnalysedEntry from '../../core/Analysis';
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { useNavigation } from "@react-navigation/native";
+import Background from '../../components/Background'
 
 
 const AnalysisScreen = ({ route }) => {
@@ -16,25 +17,27 @@ const AnalysisScreen = ({ route }) => {
   }
 
   return (
-    <View style={styles.container}>
-    <TouchableOpacity onPress={handleGoHome} style={styles.backContainer}>
-      <Image
-        style={styles.image}
-        source={require('../../assets/arrow_back.png')}
-      />
-    </TouchableOpacity>
-      <View style={styles.titleContainer}>
-        <Title style={styles.pageTitle}>Diary Entry Analysis</Title>
-        <Title style={styles.entryTitle}>{title}</Title>
+    <Background>
+      <View style={styles.container}>
+      <TouchableOpacity onPress={handleGoHome} style={styles.backContainer}>
+        <Image
+          style={styles.image}
+          source={require('../../assets/arrow_back.png')}
+        />
+      </TouchableOpacity>
+        <View style={styles.titleContainer}>
+          <Title style={styles.pageTitle}>Diary Entry Analysis</Title>
+          <Title style={styles.entryTitle}>{title}</Title>
+        </View>
+        <ScrollView style={styles.entryTextContainer}>
+          <Title style={{textAlign: 'center', paddingTop: 10, fontSize: 20}}>Your Diary Entry</Title>
+          <Text style={{textAlign: 'center', marginTop: 20}}>{diaryEntry}</Text>
+        </ScrollView>
+        <ScrollView style={styles.analysisContainer}>
+          <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/>
+        </ScrollView>
       </View>
-      <ScrollView style={styles.entryTextContainer}>
-        <Title style={{textAlign: 'center', paddingTop: 10, fontSize: 20}}>Your Diary Entry</Title>
-        <Text style={{textAlign: 'center', marginTop: 20}}>{diaryEntry}</Text>
-      </ScrollView>
-      <ScrollView style={styles.analysisContainer}>
-        <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/>
-      </ScrollView>
-    </View>
+    </Background>
   );
 };
 

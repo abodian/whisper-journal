@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAudioRecording } from '../../core/audioRecording';
 import { Audio } from 'expo-av';
 import { readFileAsBase64 } from '../../logic/readFileAsBase64';
+import Background from '../../components/Background'
 
 const { width, height } = Dimensions.get('window');
 const aspectRatio = width / height;
@@ -87,46 +88,48 @@ const SingleEntry = ({ date: propDate }) => {
 
 
   return (
-    <View style={styles.container}>
-      <View style={styles.userInputContainer}>
-        <Text
-          style={{
-            borderWidth: 0.5,
-            borderColor: 'gray',
-            padding: 15,
-            borderRadius: 10,
-            marginTop: 60,
-            marginBottom: 20,
-          }}
-        >
-          You are adding an entry for <FormattedDate date={selectedDate} />
-        </Text>
-        <Text>Press the microphone button to add your entry!</Text>
-        <AddEntry selectedDate={selectedDate} transcription={transcription} />
+    <Background>
+      <View style={styles.container}>
+        <View style={styles.userInputContainer}>
+          <Text
+            style={{
+              borderWidth: 0.5,
+              borderColor: 'gray',
+              padding: 15,
+              borderRadius: 10,
+              marginTop: 60,
+              marginBottom: 20,
+            }}
+          >
+            You are adding an entry for <FormattedDate date={selectedDate} />
+          </Text>
+          <Text>Press the microphone button to add your entry!</Text>
+          <AddEntry selectedDate={selectedDate} transcription={transcription} />
 
+          {!keyboardShown && (
+            <View style={styles.microphone}>
+            <Icon.Button
+              name="microphone"
+              size={120}
+              color={buttonColor} // use the new state variable to set the button color
+              backgroundColor="transparent"
+              onPress={handleMicrophonePress}
+              disabled={buttonColor === 'gray'} // disable the button when it's gray
+            />
+            </View>
+          )}
+              
+        </View>
         {!keyboardShown && (
-          <View style={styles.microphone}>
-          <Icon.Button
-            name="microphone"
-            size={120}
-            color={buttonColor} // use the new state variable to set the button color
-            backgroundColor="transparent"
-            onPress={handleMicrophonePress}
-            disabled={buttonColor === 'gray'} // disable the button when it's gray
-          />
-          </View>
+        <TouchableOpacity onPress={handleGoHome} style={styles.backContainer}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/arrow_back.png')}
+            />
+        </TouchableOpacity>
         )}
-            
       </View>
-      {!keyboardShown && (
-      <TouchableOpacity onPress={handleGoHome} style={styles.backContainer}>
-          <Image
-            style={styles.image}
-            source={require('../../assets/arrow_back.png')}
-          />
-      </TouchableOpacity>
-      )}
-    </View>
+    </Background>
   );
 }
 
