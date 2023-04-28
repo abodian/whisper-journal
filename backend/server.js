@@ -9,6 +9,7 @@ const UsersController = require("./controllers/user");
 const cors = require("cors");
 server.use(cors());
 require("dotenv").config();
+const { MONGO_URL } = process.env;
 
 const whisperJournalSDK = require("./whisper-journal-4ef93-firebase-adminsdk-xjbi8-f4a173182a");
 
@@ -20,13 +21,10 @@ whisperJournalSDK.private_key = process.env.PRIVATE_KEY;
 // ...
 
 mongoose
-  .connect(
-    "mongodb+srv://AlexB:bodianA@cluster0.dekgoyo.mongodb.net/whisper_journal_cloud",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("MongoDB connected successfully");
   })
