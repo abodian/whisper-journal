@@ -22,6 +22,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
     const handleAddEntry = () => {
     navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
     const data = {
+        _id: `${user.uid}_${selectedDate.toISOString()}`,
         title: title,
         diaryEntry: diaryEntry,
         date: selectedDate,
