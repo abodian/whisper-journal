@@ -5,7 +5,6 @@ const { chatGPT } = require('../gpt');
 const AnalysisController = {
   Analyse: async (req, res) => {
     try {
-      
       console.log('body', req.body)
       const prompt = req.body.prompt;
       console.log('Prompt:', prompt);
