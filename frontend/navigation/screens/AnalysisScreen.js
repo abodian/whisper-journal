@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     color: '#d3d3d3'
   },
   entryTextContainer: {
-    flex: 2,
+    flex: 3,
     alignSelf: 'center',
     borderWidth: 0.5,
     borderRadius: 10,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     textAlign: 'center',
     fontSize: 15,
-    marginBottom: 10
+    marginBottom: 5
   },
   analysisContainer: {
     flex: 3,
@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
   backContainer: {
     position: 'absolute',
     top: 10 + getStatusBarHeight(),
-    left: 4,
+    left: 1,
+    zIndex: 1,
   },
   image: {
     width: 24,

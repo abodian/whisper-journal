@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Title } from 'react-native-paper';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 
 const AnalysedEntry = ({ diaryEntry }) => {
   const [analysis, setAnalysis] = useState('Loading analysis...');
   const [category, setCategory] = useState('sentiment');
+  const [relevantAnalysis, setRelevantAnalysis] = useState('');
 
   useEffect(() => {
     const fetchData = () => {
@@ -30,6 +31,50 @@ const AnalysedEntry = ({ diaryEntry }) => {
     fetchData();
   }, [diaryEntry, category]);
 
+  useEffect(() => {
+    // Extract the relevant analysis based on the selected category
+    switch (category) {
+      case 'sentiment':
+        setRelevantAnalysis(
+          analysis.substring(
+            analysis.indexOf('Mood/Sentiment Analysis:') +
+              'Mood/Sentiment Analysis:'.length,
+            analysis.indexOf('Personalised Feedback:')
+          )
+        );
+        break;
+      case 'feedback':
+        setRelevantAnalysis(
+          analysis.substring(
+            analysis.indexOf('Personalised Feedback:') +
+              'Personalised Feedback:'.length,
+            analysis.indexOf('Recommendations for Improvement:')
+          )
+        );
+        break;
+      case 'recommendations':
+        setRelevantAnalysis(
+          analysis.substring(
+            analysis.indexOf('Recommendations for Improvement:') +
+              'Recommendations for Improvement:'.length,
+            analysis.indexOf('Atomic Habit Improvements:')
+          )
+        );
+        break;
+      case 'habits':
+        setRelevantAnalysis(
+          analysis.substring(
+            analysis.indexOf('Atomic Habit Improvements:') +
+              'Atomic Habit Improvements:'.length
+          )
+        );
+        break;
+      default:
+        setRelevantAnalysis('');
+        break;
+    }
+  }, [category, analysis]);
+
   const handleCategoryChange = value => {
     setCategory(value);
   };
@@ -42,7 +87,7 @@ const AnalysedEntry = ({ diaryEntry }) => {
           selectedValue={category}
           onValueChange={handleCategoryChange}
           style={styles.picker}
-          dropdownIconColor='#d3d3d3'
+          dropdownIconColor="#d3d3d3"
         >
           <Picker.Item label="Sentiment" value="sentiment" />
           <Picker.Item label="Feedback" value="feedback" />
@@ -50,7 +95,7 @@ const AnalysedEntry = ({ diaryEntry }) => {
           <Picker.Item label="Atomic Habits" value="habits" />
         </Picker>
       </View>
-      <Text style={styles.container}>{analysis}</Text>
+      <Text style={styles.container}>{relevantAnalysis}</Text>
     </View>
   );
 };
@@ -89,7 +134,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 210,
     alignSelf: 'center',
-    borderRadius: 25,
+    borderRadius: 60,
     marginTop: 10,
     marginBottom: 10
   }
