@@ -100,10 +100,14 @@ const AnalysedEntry = ({ diaryEntry, userId }) => {
           <Picker.Item label="Atomic Habits" value="habits" />
         </Picker>
       </View>
-      <Text style={styles.container}>{relevantAnalysis}</Text>
+      {analysis === 'Loading analysis...'
+        ? <Text style={styles.container}>Loading analysis...</Text>
+        : <Text style={styles.container}>{relevantAnalysis}</Text>
+      }
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   title: {
