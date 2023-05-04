@@ -4,12 +4,12 @@ import { Title } from 'react-native-paper';
 import AnalysedEntry from '../../core/Analysis';
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { useNavigation } from "@react-navigation/native";
-import Background from '../../components/Background'
+import BackgroundAnalysisScreen from '../../components/BackgroundAnalysisScreen'
 
 
 const AnalysisScreen = ({ route }) => {
-  // const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
-  const { title, diaryEntry, userId } = route.params;
+  const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
+  // const { title, diaryEntry, userId } = route.params;
   const navigation = useNavigation();
 
   const handleGoHome = () => {
@@ -17,7 +17,7 @@ const AnalysisScreen = ({ route }) => {
   }
 
   return (
-    <Background>
+    <BackgroundAnalysisScreen >
       <View style={styles.container}>
       <TouchableOpacity onPress={handleGoHome} style={styles.backContainer}>
         <Image
@@ -30,14 +30,15 @@ const AnalysisScreen = ({ route }) => {
           <Title style={styles.entryTitle}>{title}</Title>
         </View>
         <ScrollView style={styles.entryTextContainer}>
-          <Title style={{textAlign: 'center', paddingTop: 10, fontSize: 20}}>Your Diary Entry</Title>
-          <Text style={{textAlign: 'center', marginTop: 20}}>{diaryEntry}</Text>
+          <Title style={{textAlign: 'center', paddingTop: 10, fontSize: 20, color: '#6096B4'}}>Your Diary Entry</Title>
+          <Text style={{textAlign: 'center', marginTop: 20, color: '#d3d3d3'}}>{diaryEntry}</Text>
         </ScrollView>
         <ScrollView style={styles.analysisContainer}>
-          <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/>
+          <AnalysedEntry diaryEntry={diaryEntry}/>
+          {/* <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/> */}
         </ScrollView>
       </View>
-    </Background>
+    </BackgroundAnalysisScreen>
   );
 };
 
@@ -56,40 +57,43 @@ const styles = StyleSheet.create({
   pageTitle: {
     alignSelf: 'center',
     paddingTop: 0,
-    fontSize: 25
+    fontSize: 25,
+    color: '#6096B4'
   },
   entryTitle: {
-    marginTop: 10,
+    marginTop: 5,
+    marginBottom: 5,
     alignSelf: 'center',
-    borderWidth: 0.5,
-    borderRadius: 10,
-    borderColor: 'gray',
     width: 330,
-    height: 40,
+    height: 50,
     textAlign: 'center',
     fontSize: 15,
-    lineHeight: 40
+    lineHeight: 50,
+    color: '#d3d3d3'
   },
   entryTextContainer: {
     flex: 2,
     alignSelf: 'center',
     borderWidth: 0.5,
     borderRadius: 10,
-    borderColor: 'gray',
+    borderColor: '#d3d3d3', // Light gray
     width: 330,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     textAlign: 'center',
     fontSize: 15,
     marginBottom: 10
   },
   analysisContainer: {
-    flex: 2,
+    flex: 3,
     marginTop: 10,
     alignSelf: 'center',
     borderWidth: 0.5,
     borderRadius: 10,
-    borderColor: 'gray',
+    borderColor: '#d3d3d3', // Light gray
     width: 330,
-    height: 40,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     textAlign: 'center',
     fontSize: 15,
     lineHeight: 40,
@@ -105,5 +109,7 @@ const styles = StyleSheet.create({
     height: 24,
   },
 });
+
+
 
 export default AnalysisScreen;
