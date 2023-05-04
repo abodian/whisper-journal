@@ -8,7 +8,7 @@ const AnalysisController = {
       console.log('body', req.body)
       const prompt = req.body.prompt;
       console.log('Prompt:', prompt);
-      const userId = new mongoose.Types.ObjectId(req.body.userId) // users id from req object
+      const userId = req.body.userId // users id from req object
       console.log('user', userId)
       const analysis = await chatGPT(prompt);
       const newAnalysis = new Analysis({ result: analysis, userId: userId });

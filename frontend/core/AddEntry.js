@@ -22,7 +22,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
     const handleAddEntry = () => {
     navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
     const data = {
-        _id: `${user.uid}_${selectedDate.toISOString()}`,
+        _id: `${user.uid}_${selectedDate}`,
         title: title,
         diaryEntry: diaryEntry,
         date: selectedDate,
@@ -30,7 +30,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
     };
 // 192.168.1.197 //mike
     // fetch('http://192.168.0.106:3001/entry', { // alex
-    fetch('http://192.168.1.197:3001/entry', {
+    fetch('https://whisper-journal1.onrender.com/entry', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -46,11 +46,14 @@ const AddEntry = ({ selectedDate, transcription }) => {
         setIsDiaryEntryFocused('');
         navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
     })
-        .catch((error) => {
-        // handle error
-        console.log('Error creating entry.');
-        console.error(error);
-    });
+    .catch((error) => {
+      if (error.code === E11000) {
+          console.log('Error creating entry: You have already created an entry for this day.');
+      } else {
+          console.log('Error creating entry.');
+          console.error(error);
+      }
+  });
 };
 
     return (

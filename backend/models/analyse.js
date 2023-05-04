@@ -4,7 +4,7 @@ const User = require('./user')
 const AnalysisSchema = new mongoose.Schema({
   result: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  userId: { type: String, ref: 'User' }
 });
 
 const Analysis = mongoose.model('Analysis', AnalysisSchema, 'Analysis');

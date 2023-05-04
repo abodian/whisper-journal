@@ -4,7 +4,6 @@ const EntryController = {
   Create: async (req, res) => {
     console.log("Received request payload:", req.body);
     const entry = new Entry(req.body);
-    console.log(entry);
     try {
       await entry.save();
       console.log("Entry saved:", entry);
