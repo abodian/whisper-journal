@@ -16,7 +16,7 @@ const chatGPT = async (prompt) => {
       {
         role: "system",
         content:
-          "Please provide a mood/sentiment analysis, personalised feedback, and recommendations for improvement based on the users diary entry. Please also suggest any atomic habit improvements that could help the user improve their daily routine. Please use UK English in your response. Your response should be given in four headers: Sentiment Analysis, Personalised Feedback, Recommendations for Improvement, Atomic Habits",
+          "Please provide a mood/sentiment analysis, personalised feedback, and recommendations for improvement based on the users diary entry. Please also suggest any atomic habit improvements that could help the user improve their daily routine. Please use UK English in your response. Your response should be given in four headers: Sentiment Analysis, Personalised Feedback, Recommendations for Improvement, Atomic Habits. You should respond as if talking to the diary entry creator",
       },
       {
         role: "user",
