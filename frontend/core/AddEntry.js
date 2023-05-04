@@ -22,7 +22,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
     const handleAddEntry = () => {
     navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
     const data = {
-        _id: `${user.uid}_${selectedDate.toISOString()}`,
+        _id: `${user.uid}_${selectedDate}`,
         title: title,
         diaryEntry: diaryEntry,
         date: selectedDate,
@@ -46,11 +46,14 @@ const AddEntry = ({ selectedDate, transcription }) => {
         setIsDiaryEntryFocused('');
         navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
     })
-        .catch((error) => {
-        // handle error
-        console.log('Error creating entry.');
-        console.error(error);
-    });
+    .catch((error) => {
+      if (error.code === 11000) {
+          console.log('Error creating entry: You have already created an entry for this day.');
+      } else {
+          console.log('Error creating entry.');
+          console.error(error);
+      }
+  });
 };
 
     return (
