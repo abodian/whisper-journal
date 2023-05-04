@@ -8,8 +8,8 @@ import BackgroundAnalysisScreen from '../../components/BackgroundAnalysisScreen'
 
 
 const AnalysisScreen = ({ route }) => {
-  const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
-  // const { title, diaryEntry, userId } = route.params;
+  // const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
+  const { title, diaryEntry, userId } = route.params;
   const navigation = useNavigation();
 
   const handleGoHome = () => {
@@ -34,8 +34,8 @@ const AnalysisScreen = ({ route }) => {
           <Text style={{textAlign: 'center', marginTop: 20, color: '#d3d3d3'}}>{diaryEntry}</Text>
         </ScrollView>
         <ScrollView style={styles.analysisContainer}>
-          <AnalysedEntry diaryEntry={diaryEntry}/>
-          {/* <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/> */}
+          {/* <AnalysedEntry diaryEntry={diaryEntry}/> */}
+          <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/>
         </ScrollView>
       </View>
     </BackgroundAnalysisScreen>

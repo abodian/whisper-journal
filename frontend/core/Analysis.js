@@ -3,7 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Title } from 'react-native-paper';
 import { Picker } from '@react-native-picker/picker';
 
-const AnalysedEntry = ({ diaryEntry }) => {
+const AnalysedEntry = ({ diaryEntry, userId }) => {
+  console.log('diaryEntry first:', diaryEntry)
+  console.log('userId:', userId)
   const [analysis, setAnalysis] = useState('Loading analysis...');
   const [category, setCategory] = useState('sentiment');
   const [relevantAnalysis, setRelevantAnalysis] = useState('');
@@ -16,7 +18,7 @@ const AnalysedEntry = ({ diaryEntry }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: diaryEntry, category }),
+        body: JSON.stringify({ prompt: diaryEntry, userId: userId }),
       })
         .then(response => response.json())
         .then(data => {
@@ -29,51 +31,46 @@ const AnalysedEntry = ({ diaryEntry }) => {
     };
 
     fetchData();
-  }, [diaryEntry, category]);
+  }, [diaryEntry]);
 
   useEffect(() => {
-    // Extract the relevant analysis based on the selected category
+    const lines = analysis.split('\n');
+    let relevantLines = [];
+    let relevantHeading = '';
+  
     switch (category) {
       case 'sentiment':
-        setRelevantAnalysis(
-          analysis.substring(
-            analysis.indexOf('Mood/Sentiment Analysis:') +
-              'Mood/Sentiment Analysis:'.length,
-            analysis.indexOf('Personalised Feedback:')
-          )
-        );
+        relevantHeading = 'Mood/Sentiment Analysis:';
         break;
       case 'feedback':
-        setRelevantAnalysis(
-          analysis.substring(
-            analysis.indexOf('Personalised Feedback:') +
-              'Personalised Feedback:'.length,
-            analysis.indexOf('Recommendations for Improvement:')
-          )
-        );
+        relevantHeading = 'Personalised Feedback:';
         break;
       case 'recommendations':
-        setRelevantAnalysis(
-          analysis.substring(
-            analysis.indexOf('Recommendations for Improvement:') +
-              'Recommendations for Improvement:'.length,
-            analysis.indexOf('Atomic Habit Improvements:')
-          )
-        );
+        relevantHeading = 'Recommendations for Improvement:';
         break;
       case 'habits':
-        setRelevantAnalysis(
-          analysis.substring(
-            analysis.indexOf('Atomic Habit Improvements:') +
-              'Atomic Habit Improvements:'.length
-          )
-        );
+        relevantHeading = 'Atomic Habit Improvements:';
         break;
       default:
-        setRelevantAnalysis('');
         break;
     }
+  
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (line.startsWith(relevantHeading)) {
+        relevantLines.push(line.substring(relevantHeading.length));
+        i++; // Skip the blank line
+        while (i < lines.length && !lines[i].startsWith('- ')) {
+          relevantLines.push(lines[i]);
+          i++;
+        }
+        break;
+      }
+    }
+  
+    setRelevantAnalysis(relevantLines.join('\n'));
   }, [category, analysis]);
+  
 
   const handleCategoryChange = value => {
     setCategory(value);
