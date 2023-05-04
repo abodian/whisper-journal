@@ -37,6 +37,7 @@ server.use(express.json());
 server.get("/", (req, res) => {
   res.send("Hello World!");
 });
+server.get('/entry/:id', EntryController.Get)
 
 server.post("/entry", EntryController.Create);
 
