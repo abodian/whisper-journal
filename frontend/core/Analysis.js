@@ -40,16 +40,16 @@ const AnalysedEntry = ({ diaryEntry, userId }) => {
   
     switch (category) {
       case 'sentiment':
-        relevantHeading = 'Mood/Sentiment Analysis:';
+        relevantHeading = 'Sentiment Analysis:';
         break;
       case 'feedback':
         relevantHeading = 'Personalised Feedback:';
         break;
       case 'recommendations':
-        relevantHeading = 'Recommendations For Improvement:';
+        relevantHeading = 'Recommendations for Improvement:';
         break;
       case 'habits':
-        relevantHeading = 'Atomic Habit Improvements:';
+        relevantHeading = 'Atomic Habits:';
         break;
       default:
         break;
@@ -59,9 +59,16 @@ const AnalysedEntry = ({ diaryEntry, userId }) => {
       const line = lines[i];
       if (line.startsWith(relevantHeading)) {
         relevantLines.push(line.substring(relevantHeading.length));
-        i++; // Skip the blank line
+        i++; 
         while (i < lines.length && !lines[i].startsWith('- ')) {
           relevantLines.push(lines[i]);
+          if (i < lines.length - 1 && (lines[i+1].startsWith('Sentiment Analysis:')
+            || lines[i+1].startsWith('Mood Analysis:')
+            || lines[i+1].startsWith('Personalised Feedback:')
+            || lines[i+1].startsWith('Recommendations for Improvement:')
+            || lines[i+1].startsWith('Atomic Habits:'))) {
+            break;
+          }
           i++;
         }
         break;
@@ -70,6 +77,7 @@ const AnalysedEntry = ({ diaryEntry, userId }) => {
   
     setRelevantAnalysis(relevantLines.join('\n'));
   }, [category, analysis]);
+  
   
 
   const handleCategoryChange = value => {
