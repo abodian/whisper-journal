@@ -47,7 +47,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
         navigation.navigate('AnalysisScreen', { title: title, diaryEntry: diaryEntry, userId: user.uid });
     })
     .catch((error) => {
-      if (error.code === 11000) {
+      if (error.code === E11000) {
           console.log('Error creating entry: You have already created an entry for this day.');
       } else {
           console.log('Error creating entry.');
