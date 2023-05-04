@@ -46,7 +46,7 @@ const AnalysedEntry = ({ diaryEntry, userId }) => {
         relevantHeading = 'Personalised Feedback:';
         break;
       case 'recommendations':
-        relevantHeading = 'Recommendations for Improvement:';
+        relevantHeading = 'Recommendations For Improvement:';
         break;
       case 'habits':
         relevantHeading = 'Atomic Habit Improvements:';
