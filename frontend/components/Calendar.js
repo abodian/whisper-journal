@@ -14,7 +14,7 @@ const EntryCalendar = ({ onDayPress }) => {
             <Icon
                 name={direction === 'left' ? 'chevron-left' : 'chevron-right'}
                 type='font-awesome'
-                color='black'
+                color='#6096B4'
                 size={12}
             />
         </View>
@@ -55,9 +55,23 @@ const EntryCalendar = ({ onDayPress }) => {
             // Customize the appearance of the calendar
             style={{
                 margin: 1,
-                elevation: 5,
+                // elevation: 5,
                 borderRadius: 5,
-                width: 350
+                borderColor: 'white',
+                borderWidth: 0.2,
+                width: 350,
+
+            }}
+            theme={{
+              backgroundColor: '#3B4252',
+              calendarBackground: '3B4252',
+              textSectionTitleColor: '#ffffff',
+              selectedDayBackgroundColor: '##ffffff',
+              selectedDayTextColor: '#ffffff',
+              todayTextColor: '#00adf5',
+              todayBackgroundColor: '#ffffff',
+              dayTextColor: '#ffffff',
+              monthTextColor: '#6096B4'
             }}
             // Specify the current date
             // current={'2023-04-13'}

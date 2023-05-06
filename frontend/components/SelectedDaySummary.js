@@ -29,18 +29,22 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 40,
+    color: '#6096B4'
   },
   title: {
     fontSize: 25,
     textAlign: 'left',
+    color: '#6096B4'
   },
   date: {
     fontSize: 15,
     textAlign: 'right',
+    color: '#6096B4'
   },
   text: {
     fontSize: 15,
     marginTop: 15,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#ffffff'
   },
 })

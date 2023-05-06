@@ -23,24 +23,29 @@ export default function WeeklySummary(props) {
 const styles = StyleSheet.create({
   weeklySummary: {
     height: 175,
+    
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 40,
+    color: '#ffffff'
   },
   title: {
     fontSize: 25,
     textAlign: 'left',
+    color: '#6096B4'
   },
   date: {
     fontSize: 15,
     textAlign: 'right',
+    color: '#6096B4'
   },
   text: {
     fontSize: 15,
     marginTop: 15,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#ffffff'
   },
 })

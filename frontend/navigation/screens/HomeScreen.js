@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import EntryCalendar from '../../components/Calendar';
 import WeeklySummary from '../../components/WeeklySummary';
 import SelectedDaySummary from '../../components/SelectedDaySummary';
-import Background from '../../components/Background'
+import BackgroundHomeScreen from '../../components/BackgroundHomeScreen'
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -13,7 +13,7 @@ const HomeScreen = ({ navigation }) => {
   }
   
   return (
-    <Background>
+    <BackgroundHomeScreen>
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.calendarContainer}>
@@ -25,7 +25,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-    </Background>
+    </BackgroundHomeScreen>
   );
 }
 
