@@ -73,7 +73,7 @@ const AnalysedEntry = ({ diaryEntry, userId }) => {
             break;
           }
           i++;
-          firstLine = false; // add this line
+          firstLine = false; 
         }
         break;
       }

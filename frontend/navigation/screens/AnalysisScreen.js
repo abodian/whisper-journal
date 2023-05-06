@@ -11,8 +11,8 @@ const windowHeight = Dimensions.get('window').height
 
 
 const AnalysisScreen = ({ route }) => {
-  const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
-  // const { title, diaryEntry, userId } = route.params;
+  // const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
+  const { title, diaryEntry, userId } = route.params;
   const navigation = useNavigation();
 
   const handleGoHome = () => {
@@ -38,8 +38,8 @@ const AnalysisScreen = ({ route }) => {
           <Text style={{ textAlign: 'center', marginTop: 20, color: '#d3d3d3' }}>{diaryEntry}</Text>
         </ScrollView>
         <ScrollView style={styles.analysisContainer}>
-          <AnalysedEntry diaryEntry={diaryEntry} />
-          {/* <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/> */}
+          {/* <AnalysedEntry diaryEntry={diaryEntry} /> */}
+          <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/>
         </ScrollView>
         </View>
       </View>
@@ -79,19 +79,19 @@ const styles = StyleSheet.create({
     borderWidth: 2.0,
     borderRadius: 10,
     borderStyle: 'inset',
-    borderColor: '#d3d3d3', // Light gray
+    borderColor: '#d3d3d3', 
     width: 330,
     paddingHorizontal: 10,
     textAlign: 'center',
     fontSize: 15,
     marginBottom: 10,
-    height: windowHeight * 0.4 // Change this value
+    height: windowHeight * 0.4 
   },
   analysisContainer: {
     alignSelf: 'center',
     width: 330,
     marginBottom: 20,
-    height: windowHeight * 0.6 // Change this value
+    height: windowHeight * 0.6 
   },
   backContainer: {
     position: 'absolute',
