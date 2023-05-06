@@ -58,22 +58,27 @@ const AnalysedEntry = ({ diaryEntry, userId }) => {
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i];
       if (line.startsWith(relevantHeading)) {
+        let firstLine = true; // add this line
         relevantLines.push(line.substring(relevantHeading.length));
-        i++; 
+        i++;
         while (i < lines.length && !lines[i].startsWith('- ')) {
-          relevantLines.push(lines[i]);
-          if (i < lines.length - 1 && (lines[i+1].startsWith('Sentiment Analysis:')
-            || lines[i+1].startsWith('Mood Analysis:')
-            || lines[i+1].startsWith('Personalised Feedback:')
-            || lines[i+1].startsWith('Recommendations for Improvement:')
-            || lines[i+1].startsWith('Atomic Habits:'))) {
+          if (!firstLine || lines[i].trim() !== '') { // modify this line
+            relevantLines.push(lines[i]);
+          }
+          if (i < lines.length - 1 && (lines[i + 1].startsWith('Sentiment Analysis:')
+            || lines[i + 1].startsWith('Mood Analysis:')
+            || lines[i + 1].startsWith('Personalised Feedback:')
+            || lines[i + 1].startsWith('Recommendations for Improvement:')
+            || lines[i + 1].startsWith('Atomic Habits:'))) {
             break;
           }
           i++;
+          firstLine = false; // add this line
         }
         break;
       }
     }
+    
   
     setRelevantAnalysis(relevantLines.join('\n'));
   }, [category, analysis]);
@@ -117,10 +122,10 @@ const styles = StyleSheet.create({
     height: 30,
     textAlign: 'center',
     fontSize: 15,
-    lineHeight: 40,
+    // lineHeight: 20,
     marginBottom: 5,
     fontSize: 20,
-    color: '#6096B4'
+    color: '#6096B4',
   },
   container: {
     alignSelf: 'center',
@@ -145,7 +150,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 60,
     marginTop: 10,
-    marginBottom: 10
+    // marginBottom: 10
   }
 });
 

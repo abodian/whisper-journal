@@ -5,11 +5,14 @@ import AnalysedEntry from '../../core/Analysis';
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import { useNavigation } from "@react-navigation/native";
 import BackgroundAnalysisScreen from '../../components/BackgroundAnalysisScreen'
+import { Dimensions } from 'react-native';
+
+const windowHeight = Dimensions.get('window').height
 
 
 const AnalysisScreen = ({ route }) => {
-  // const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
-  const { title, diaryEntry, userId } = route.params;
+  const { title, diaryEntry } = {title: 'This is a test title', diaryEntry: 'This is a test diary entry'};
+  // const { title, diaryEntry, userId } = route.params;
   const navigation = useNavigation();
 
   const handleGoHome = () => {
@@ -17,26 +20,28 @@ const AnalysisScreen = ({ route }) => {
   }
 
   return (
-    <BackgroundAnalysisScreen >
+    <BackgroundAnalysisScreen>
       <View style={styles.container}>
-      <TouchableOpacity onPress={handleGoHome} style={styles.backContainer}>
-        <Image
-          style={styles.image}
-          source={require('../../assets/arrow_back.png')}
-        />
-      </TouchableOpacity>
+        <TouchableOpacity onPress={handleGoHome} style={styles.backContainer}>
+          <Image
+            style={styles.image}
+            source={require('../../assets/arrow_back.png')}
+          />
+        </TouchableOpacity>
         <View style={styles.titleContainer}>
           <Title style={styles.pageTitle}>Diary Entry Analysis</Title>
           <Title style={styles.entryTitle}>{title}</Title>
         </View>
+        <View style={{ flex: 1, width: '100%' }}>
         <ScrollView style={styles.entryTextContainer}>
-          <Title style={{textAlign: 'center', paddingTop: 10, fontSize: 20, color: '#6096B4'}}>Your Diary Entry</Title>
-          <Text style={{textAlign: 'center', marginTop: 20, color: '#d3d3d3'}}>{diaryEntry}</Text>
+          <Title style={{ textAlign: 'center', paddingTop: 10, fontSize: 20, color: '#6096B4' }}>Your Diary Entry</Title>
+          <Text style={{ textAlign: 'center', marginTop: 20, color: '#d3d3d3' }}>{diaryEntry}</Text>
         </ScrollView>
         <ScrollView style={styles.analysisContainer}>
-          {/* <AnalysedEntry diaryEntry={diaryEntry}/> */}
-          <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/>
+          <AnalysedEntry diaryEntry={diaryEntry} />
+          {/* <AnalysedEntry diaryEntry={diaryEntry} userId={userId}/> */}
         </ScrollView>
+        </View>
       </View>
     </BackgroundAnalysisScreen>
   );
@@ -62,42 +67,31 @@ const styles = StyleSheet.create({
   },
   entryTitle: {
     marginTop: 5,
-    marginBottom: 5,
     alignSelf: 'center',
     width: 330,
     height: 50,
     textAlign: 'center',
     fontSize: 15,
-    lineHeight: 50,
     color: '#d3d3d3'
   },
   entryTextContainer: {
-    flex: 3,
     alignSelf: 'center',
-    borderWidth: 0.5,
+    borderWidth: 2.0,
     borderRadius: 10,
+    borderStyle: 'inset',
     borderColor: '#d3d3d3', // Light gray
     width: 330,
     paddingHorizontal: 10,
-    paddingVertical: 10,
     textAlign: 'center',
     fontSize: 15,
-    marginBottom: 5
+    marginBottom: 10,
+    height: windowHeight * 0.4 // Change this value
   },
   analysisContainer: {
-    flex: 3,
-    marginTop: 10,
     alignSelf: 'center',
-    borderWidth: 0.5,
-    borderRadius: 10,
-    borderColor: '#d3d3d3', // Light gray
     width: 330,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    textAlign: 'center',
-    fontSize: 15,
-    lineHeight: 40,
-    marginBottom: 20
+    marginBottom: 20,
+    height: windowHeight * 0.6 // Change this value
   },
   backContainer: {
     position: 'absolute',
