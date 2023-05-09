@@ -21,7 +21,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
           <View style={styles.summaryContainer}>
             <WeeklySummary style={styles.weeklyContainer}/>
-            <SelectedDaySummary styles={styles.selectedDayContainer}/>
+            <SelectedDaySummary style={styles.selectedDayContainer}/>
           </View>
         </View>
       </ScrollView>
