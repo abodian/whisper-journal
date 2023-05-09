@@ -28,9 +28,9 @@ const AddEntry = ({ selectedDate, transcription }) => {
         date: selectedDate,
         userId: user.uid
     };
-// 192.168.1.197 //mike
+// 192.168.1.197 //mike whisper-journal1.onrender.com
     // fetch('http://192.168.0.106:3001/entry', { // alex
-    fetch('https://whisper-journal1.onrender.com/entry', {
+    fetch('http://192.168.1.197:3001/entry', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -54,6 +54,23 @@ const AddEntry = ({ selectedDate, transcription }) => {
           console.error(error);
       }
   });
+
+  //API end point to summarise the entry 
+  fetch('http://192.168.1.197:3001/summary', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({diaryEntry: diaryEntry, userId: user.uid}),
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("summary:", data)
+    console.log('entry summarised successfully');
+  })
+  .catch((error) => {
+    console.log("error", error)
+  })
 };
 
     return (

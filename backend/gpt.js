@@ -42,5 +42,25 @@ const chatGPTTranscribe = async (buffer) => {
     // throw error;
   }
 };
+const chatGPTSummary = async (prompt) => {
+  console.log(prompt);
+  const response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [
+      {
+        role: "system",
+        content:
+          "Please provide me with a summary of my day from my diary entry",
+      },
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
+  });
 
-module.exports = { chatGPT, chatGPTTranscribe };
+  console.log(response.data.choices[0].message.content);
+  return response.data.choices[0].message.content;
+};
+
+module.exports = { chatGPT, chatGPTTranscribe, chatGPTSummary };

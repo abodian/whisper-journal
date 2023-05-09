@@ -12,6 +12,7 @@ require("dotenv").config();
 const { MONGO_URL } = process.env;
 
 const whisperJournalSDK = require("./whisper-journal-4ef93-firebase-adminsdk-xjbi8-f4a173182a");
+const SummaryController = require("./controllers/summary");
 
 // Use the configuration values
 whisperJournalSDK.private_key_id = process.env.PRIVATE_KEY_ID;
@@ -44,6 +45,7 @@ server.post("/entry", EntryController.Create);
 server.post("/analyse", AnalysisController.Analyse);
 server.post("/transcribe", TranscribeController.Transcribe);
 server.post("/users", UsersController.Create);
+server.post('/summary', SummaryController.Summarize)
 
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
