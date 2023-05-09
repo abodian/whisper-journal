@@ -1,7 +1,19 @@
 import React from 'react';
+import { getAuth } from "firebase/auth"; //for user id 
 
-const _id = "6442bd8c94853da5a4daa085_2023-04-27T08:00:00.000Z" // example id of an entry, userId_date
-const GetDiaryEntry = () => {
+
+
+
+ const auth = getAuth(); //get user's id    
+const user = auth.currentUser; 
+const userID =  user.uid; // save user's id to variable for api call
+
+
+
+
+const GetDiaryEntry = ({ selectedDate }) => {
+    const _id = `${userID}_${selectedDate}`
+    
   fetch(`http://localhost:3001/entry/${_id}`)
     .then((response) => {
         if (response.ok) {
