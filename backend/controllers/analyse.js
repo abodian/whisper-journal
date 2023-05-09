@@ -5,11 +5,11 @@ const { chatGPT } = require('../gpt');
 const AnalysisController = {
   Analyse: async (req, res) => {
     try {
-      console.log('body', req.body)
+      // console.log('body', req.body)
       const prompt = req.body.prompt;
-      console.log('Prompt:', prompt);
+      // console.log('Prompt:', prompt);
       const userId = req.body.userId // users id from req object
-      console.log('user', userId)
+      // console.log('user', userId)
       const analysis = await chatGPT(prompt);
       const newAnalysis = new Analysis({ result: analysis, userId: userId });
       await newAnalysis.save();
