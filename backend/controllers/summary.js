@@ -9,10 +9,12 @@ const SummaryController = {
         // console.log('Diary Entry:', prompt);
         const userId = req.body.userId; // user id from req object
         // console.log('User:', userId);
+        const date = req.body.date
         const summary = await chatGPTSummary(prompt);
         const newSummary = new Summary({
+          _id: `${userId}_${date}`,
           userId: userId,
-          date: new Date(),
+          date: date,
           summary: summary
         });
         await newSummary.save();

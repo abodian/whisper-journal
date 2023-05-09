@@ -61,7 +61,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({diaryEntry: diaryEntry, userId: user.uid}),
+    body: JSON.stringify({diaryEntry: diaryEntry, userId: user.uid, date: selectedDate}),
   })
   .then((response) => response.json())
   .then((data) => {
