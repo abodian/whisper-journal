@@ -25,6 +25,18 @@ const SummaryController = {
         res.status(500).json({ message: 'Internal server error' });
       }
     },
+    Get: async (req, res) => {
+      const entry = await Entry.findById(req.params.id);
+      try {
+        if (!entry) {
+          return res.status(404).json({ message: "Entry not found" });
+        }
+        res.json(entry);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+      }
+    },
   };
 
 

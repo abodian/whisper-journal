@@ -1,17 +1,14 @@
 import React from 'react';
 import { getAuth } from "firebase/auth"; //for user id 
 
-
-
-
- const auth = getAuth(); //get user's id    
+const auth = getAuth(); //get user's id    
 const user = auth.currentUser; 
 const userID =  user.uid; // save user's id to variable for api call
 
 
 
 
-const GetDiaryEntry = ({ selectedDate }) => {
+const GetSummary = ({ selectedDate }) => {
     const _id = `${userID}_${selectedDate}`
     
   fetch(`http://localhost:3001/entry/${_id}`)
@@ -23,7 +20,7 @@ const GetDiaryEntry = ({ selectedDate }) => {
         }
     })
     .then((data) => {
-        console.log(data);
+        console.log('data', data);
         
     })
     .catch((error) => {
@@ -33,4 +30,4 @@ const GetDiaryEntry = ({ selectedDate }) => {
 
 }
 
-export default GetDiaryEntry
+export default GetSummary
