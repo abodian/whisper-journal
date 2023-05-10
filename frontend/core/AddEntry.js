@@ -12,7 +12,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
     const auth = getAuth();
     const user = auth.currentUser;
     // console.log('user', user)
-    
+    console.log('selectedDate', selectedDate)
 
     useEffect(() => {
       setDiaryEntry(transcription || '');

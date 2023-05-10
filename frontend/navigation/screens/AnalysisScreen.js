@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 2.0,
     borderRadius: 10,
-    borderStyle: 'inset',
+    borderStyle: 'solid',
     borderColor: '#d3d3d3', 
     width: 330,
     paddingHorizontal: 10,

@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native';
 import EntryCalendar from '../../components/Calendar';
 import WeeklySummary from '../../components/WeeklySummary';
-import SelectedDaySummary from '../../components/SelectedDaySummary';
+import SelectedDaySummary from '../../core/SelectedDaySummary';
 import BackgroundHomeScreen from '../../components/BackgroundHomeScreen'
 import { useNavigation } from '@react-navigation/native';
+import { format } from 'date-fns'
 
 
 const HomeScreen = ({ navigation }) => {
+  const [selectedDate, setSelectedDate] = useState('')
   const handleDayPress = (day) => {
-    navigation.navigate('SingleEntry', { date: day.dateString });
+    setSelectedDate(day.dateString)
   }
-  
+  const formattedSelectedDate = selectedDate ? format(new Date(selectedDate), 'MM-dd-yyyy') : '' ;
+  console.log('selected date home', formattedSelectedDate)
   return (
     <BackgroundHomeScreen>
       <ScrollView>
@@ -19,9 +22,11 @@ const HomeScreen = ({ navigation }) => {
           <View style={styles.calendarContainer}>
           <EntryCalendar onDayPress={handleDayPress} />
           </View>
+          
           <View style={styles.summaryContainer}>
             <WeeklySummary style={styles.weeklyContainer}/>
-            <SelectedDaySummary style={styles.selectedDayContainer}/>
+            
+            <SelectedDaySummary selectedDate={formattedSelectedDate} style={styles.selectedDayContainer}/>
           </View>
         </View>
       </ScrollView>
