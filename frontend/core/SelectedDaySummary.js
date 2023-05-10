@@ -26,7 +26,7 @@ export default function SelectedDaySummary( {selectedDate} ) {
       const _id = `${userID}_${selectedDate}`;
 
       try {
-        const response = await fetch(`http://192.168.1.197:3001/summary/${_id}`);
+        const response = await fetch(`https://whisper-journal1.onrender.com/summary/${_id}`);
 
         if (response.ok) {
           const data = await response.json();

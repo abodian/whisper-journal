@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native';
 import EntryCalendar from '../../components/Calendar';
 import WeeklySummary from '../../components/WeeklySummary';
-import SelectedDaySummary from '../../components/SelectedDaySummary';
+import SelectedDaySummary from '../../core/SelectedDaySummary';
 import BackgroundHomeScreen from '../../components/BackgroundHomeScreen'
 import { useNavigation } from '@react-navigation/native';
 import { format } from 'date-fns'
