@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native';
 import EntryCalendar from '../../components/Calendar';
 import WeeklySummary from '../../components/WeeklySummary';
@@ -8,8 +8,9 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const HomeScreen = ({ navigation }) => {
+  const [selectedDate, setSelectedDate] = useState('')
   const handleDayPress = (day) => {
-    navigation.navigate('SingleEntry', { date: day.dateString });
+    setSelectedDate(day.dateString)
   }
   
   return (
@@ -21,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
           <View style={styles.summaryContainer}>
             <WeeklySummary style={styles.weeklyContainer}/>
-            <SelectedDaySummary style={styles.selectedDayContainer}/>
+            <SelectedDaySummary selectedDate={selectedDate} style={styles.selectedDayContainer}/>
           </View>
         </View>
       </ScrollView>

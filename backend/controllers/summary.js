@@ -26,12 +26,12 @@ const SummaryController = {
       }
     },
     Get: async (req, res) => {
-      const entry = await Entry.findById(req.params.id);
+      const sumary = await Summary.findById(req.params.id);
       try {
-        if (!entry) {
-          return res.status(404).json({ message: "Entry not found" });
+        if (!sumary) {
+          return res.status(404).json({ message: "Summarynot found" });
         }
-        res.json(entry);
+        res.json(sumary);
       } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");
