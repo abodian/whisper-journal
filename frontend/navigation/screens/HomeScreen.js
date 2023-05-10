@@ -5,6 +5,7 @@ import WeeklySummary from '../../components/WeeklySummary';
 import SelectedDaySummary from '../../components/SelectedDaySummary';
 import BackgroundHomeScreen from '../../components/BackgroundHomeScreen'
 import { useNavigation } from '@react-navigation/native';
+import { format } from 'date-fns'
 
 
 const HomeScreen = ({ navigation }) => {
@@ -12,7 +13,8 @@ const HomeScreen = ({ navigation }) => {
   const handleDayPress = (day) => {
     setSelectedDate(day.dateString)
   }
-  console.log('selected date home', selectedDate)
+  const formattedSelectedDate = selectedDate ? format(new Date(selectedDate), 'MM-dd-yyyy') : '' ;
+  console.log('selected date home', formattedSelectedDate)
   return (
     <BackgroundHomeScreen>
       <ScrollView>
@@ -20,9 +22,11 @@ const HomeScreen = ({ navigation }) => {
           <View style={styles.calendarContainer}>
           <EntryCalendar onDayPress={handleDayPress} />
           </View>
+          
           <View style={styles.summaryContainer}>
             <WeeklySummary style={styles.weeklyContainer}/>
-            <SelectedDaySummary selectedDate={selectedDate} style={styles.selectedDayContainer}/>
+            
+            <SelectedDaySummary selectedDate={formattedSelectedDate} style={styles.selectedDayContainer}/>
           </View>
         </View>
       </ScrollView>

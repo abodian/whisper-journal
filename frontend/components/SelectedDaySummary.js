@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native'
+import { StyleSheet, View, Dimensions, ScrollView } from 'react-native'
 import { Text } from 'react-native-paper'
 import { getAuth } from "firebase/auth"; //for user id 
+
 
 const screenWidth = Dimensions.get('window').width;
 const marginRightPercentage = screenWidth < 400 ? 5 : 12; // last number adjusts how far apart the 
@@ -10,7 +11,7 @@ const marginRightPercentage = screenWidth < 400 ? 5 : 12; // last number adjusts
 
 export default function SelectedDaySummary( {selectedDate} ) {
   const [summary, setSummary] = useState('');
-  console.log('date', selectedDate)
+  console.log('date selected day', selectedDate)
   const auth = getAuth();
   const user = auth.currentUser;
   const userID = user ? user.uid : null;
@@ -28,14 +29,15 @@ export default function SelectedDaySummary( {selectedDate} ) {
         const response = await fetch(`http://192.168.1.197:3001/summary/${_id}`);
 
         if (response.ok) {
-          const data = awaitresponse.json();
+          const data = await response.json();
           console.log('data', data)
           setSummary(data.summary);
         } else {
-          throw new Error('Error fetching data')
+          // throw new Error('Error fetching data first')
+          setSummary('Please add an entry')
         }
       } catch (error) {
-        console.error('Error fetching data', error);
+        console.error('Error fetching data sec', error);
       }
     }
 
@@ -44,6 +46,7 @@ export default function SelectedDaySummary( {selectedDate} ) {
   }, [selectedDate, userID])
 
   return (
+   
     <View style={styles.daySummary}>
       <View style={styles.header}>
         <Text style={[styles.title, { marginRight: screenWidth * marginRightPercentage / 100 }]}>Selected Day Summary</Text>
@@ -53,6 +56,7 @@ export default function SelectedDaySummary( {selectedDate} ) {
         <Text style={styles.text}>{summary}</Text>
       </View>
     </View>
+   
   )
 }
 
