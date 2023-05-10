@@ -12,7 +12,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
     const auth = getAuth();
     const user = auth.currentUser;
     // console.log('user', user)
-    
+    console.log('selectedDate', selectedDate)
 
     useEffect(() => {
       setDiaryEntry(transcription || '');
@@ -30,7 +30,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
     };
 // 192.168.1.197 //mike whisper-journal1.onrender.com
     // fetch('http://192.168.0.106:3001/entry', { // alex
-    fetch('https://whisper-journal1.onrender.com/entry', {
+    fetch('http://192.168.1.197:3001/entry', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const AddEntry = ({ selectedDate, transcription }) => {
   });
 
   //API end point to summarise the entry 
-  fetch('https://whisper-journal1.onrender.com/summary', {
+  fetch('http://192.168.1.197:3001/summary', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

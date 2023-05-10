@@ -12,7 +12,7 @@ const HomeScreen = ({ navigation }) => {
   const handleDayPress = (day) => {
     setSelectedDate(day.dateString)
   }
-  
+  console.log('selected date home', selectedDate)
   return (
     <BackgroundHomeScreen>
       <ScrollView>

@@ -4,12 +4,13 @@ const Summary = require('../models/summary')
 const SummaryController = {
     Summarize: async (req, res) => {
       try {
-        // console.log('body', req.body);
+        console.log('body', req.body);
         const prompt = req.body.diaryEntry;
-        // console.log('Diary Entry:', prompt);
+        console.log('Diary Entry:', prompt);
         const userId = req.body.userId; // user id from req object
-        // console.log('User:', userId);
+        console.log('User:', userId);
         const date = req.body.date
+        console.log('date', date)
         const summary = await chatGPTSummary(prompt);
         const newSummary = new Summary({
           _id: `${userId}_${date}`,

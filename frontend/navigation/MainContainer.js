@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { format } from 'date-fns';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -15,6 +16,7 @@ const addEntryName = 'Add Entry'
 const analysisName = 'Analysis'
 
 const Tab = createBottomTabNavigator();
+const currentDate = format(new Date(), 'MM-dd-yyyy');
 
 const MainContainer = () => {
   return (
@@ -38,7 +40,7 @@ const MainContainer = () => {
     })}
     >
       <Tab.Screen name={homeName} component={HomeScreen} options={{ headerShown: false }} />
-      <Tab.Screen name={addEntryName} component={SingleEntry} options={{ headerShown: false, tabBarVisible: false }}   initialParams={{ date: Date.now() }}  />
+      <Tab.Screen name={addEntryName} component={SingleEntry} options={{ headerShown: false, tabBarVisible: false }}   initialParams={{ date: currentDate }}  />
       <Tab.Screen name={settingsName} component={SettingsScreen} options={{ headerShown: false }} />
       {/* <Tab.Screen name={analysisName} component={AnalysisScreen} options={{ headerShown: false }} /> */}
     </Tab.Navigator>
