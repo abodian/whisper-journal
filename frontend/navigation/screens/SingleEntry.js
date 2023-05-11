@@ -2,7 +2,7 @@ import { useRoute } from '@react-navigation/native';
 import { View, StyleSheet, Dimensions, Text, Keyboard, Platform, TouchableOpacity, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import FormattedDate from '../../components/Date';
+import CustomFormattedDate from '../../components/Date';
 import AddEntry from '../../core/AddEntry';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAudioRecording } from '../../core/audioRecording';
@@ -18,6 +18,7 @@ const SingleEntry = ({ date: propDate }) => {
   const navigation = useNavigation();
   const route = useRoute();
   const routeDate = route.params && route.params.date;
+  console.log('route date', routeDate)
   const selectedDate = propDate && propDate !== '' ? propDate : routeDate;
   const [isRecording, setIsRecording] = useState(false);
   const { startRecording, stopRecording, transcribeRecording } = useAudioRecording();
@@ -101,10 +102,10 @@ const SingleEntry = ({ date: propDate }) => {
               marginBottom: 20,
             }}
           >
-            You are adding an entry for <FormattedDate date={selectedDate} />
+            You are adding an entry for <CustomFormattedDate date={routeDate} />
           </Text>
           <Text>Press the microphone button to add your entry!</Text>
-          <AddEntry selectedDate={selectedDate} transcription={transcription} />
+          <AddEntry selectedDate={routeDate} transcription={transcription} />
 
           {!keyboardShown && (
             <View style={styles.microphone}>
