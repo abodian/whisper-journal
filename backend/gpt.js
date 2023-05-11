@@ -50,7 +50,7 @@ const chatGPTSummary = async (prompt) => {
       {
         role: "system",
         content:
-          "Please provide me with a summary of my day from my diary entry",
+          "Please provide me with a summary of my day from my diary entry. You should respond as if talking to the diary entry creator",
       },
       {
         role: "user",
