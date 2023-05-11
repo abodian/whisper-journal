@@ -11,7 +11,7 @@ const marginRightPercentage = screenWidth < 400 ? 5 : 12; // last number adjusts
 
 export default function SelectedDaySummary( {selectedDate} ) {
   const [summary, setSummary] = useState('');
-  console.log('date selected day', selectedDate)
+  console.log('SelectedDaySummary', selectedDate)
   const auth = getAuth();
   const user = auth.currentUser;
   const userID = user ? user.uid : null;
