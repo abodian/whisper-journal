@@ -10,29 +10,27 @@ const DAY_NAMES = [
   'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
 ];
 
-const formatDate = (dateString) => {
-  const date = new Date(dateString);
-  const day = date.getDate();
-  const month = MONTH_NAMES[date.getMonth()];
-  const year = date.getFullYear();
-  const dayName = DAY_NAMES[date.getDay()];
-
-  return `${dayName}, ${day}${getDaySuffix(day)} ${month} ${year}`;
-}
-
-const getDaySuffix = (day) => {
+const getOrdinalSuffix = (day) => {
   if (day > 3 && day < 21) return 'th';
   switch (day % 10) {
-    case 1:  return "st";
-    case 2:  return "nd";
-    case 3:  return "rd";
-    default: return "th";
+    case 1: return 'st';
+    case 2: return 'nd';
+    case 3: return 'rd';
+    default: return 'th';
   }
-}
-
-const FormattedDate = ({ date }) => {
-  const formattedDate = formatDate(date);
-  return <Text>{formattedDate}</Text>;
 };
 
-export default FormattedDate;
+const CustomFormattedDate = ({ date }) => {
+  const [month, day, year] = date.split('-').map(Number);
+  const formattedDate = new Date(year, month - 1, day);
+  const dayName = DAY_NAMES[formattedDate.getDay()];
+  const monthName = MONTH_NAMES[formattedDate.getMonth()];
+  const ordinalSuffix = getOrdinalSuffix(day);
+
+  return (
+    <Text>{`${dayName}, ${day}${ordinalSuffix} ${monthName} ${year}`}</Text>
+  );
+};
+
+export default CustomFormattedDate;
+
