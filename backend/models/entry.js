@@ -4,7 +4,7 @@ const EntrySchema = new mongoose.Schema({
   _id: { type: String, required: true},
   title: { type: String, required: true },
   diaryEntry: { type: String, required: true },
-  date: { type: Date },
+  date: { type: String },
   userId: { type: String, ref: 'User' } // add user reference
 });
 
