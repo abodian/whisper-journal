@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react'
 import { useEffect } from 'react';
-import { StyleSheet, View, Dimensions, ScrollView } from 'react-native'
-import { Text } from 'react-native-paper'
 import { getAuth } from "firebase/auth"; //for user id 
 
 export const useSummary = (userID, selectedDate) => {

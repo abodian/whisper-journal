@@ -11,12 +11,12 @@ const marginRightPercentage = screenWidth < 400 ? 5 : 12; // last number adjusts
 // two elements are
 
 export default function SelectedDaySummary( {selectedDate} ) {
-  // const [summary, setSummary] = useState('');
+  const [summary, setSummary] = useState('');
   console.log('SelectedDaySummary', selectedDate)
   const auth = getAuth();
   const user = auth.currentUser;
   const userID = user ? user.uid : null;
-  const summary = useSummary(userID, selectedDate)
+ 
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -34,7 +34,6 @@ export default function SelectedDaySummary( {selectedDate} ) {
           const data = await response.json();
           console.log('data', data)
           setSummary(data.summary);
-          return data.summary
         } else {
           // throw new Error('Error fetching data first')
           setSummary('Please add an entry')
