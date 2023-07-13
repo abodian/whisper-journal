@@ -31,33 +31,34 @@ const EntryCalendar = ({ onDayPress, selectedDate }) => {
         </View>
     );
     console.log('summary calendar', summary)
-
+    
     let sentimentScores;
     if (summary === "Please add an entry") {
       sentimentScores = null;
     } else {
       sentimentScores = sentiment.analyze(summary).comparative;
     }
-    
   console.log("sentiment score", sentimentScores)
 
-    const getDayColor = (score) => {
-        if (score >= 0.3) {
-          return '#3cb371'; // green
-        } else if (score >= 0.2) {
-          return '#90ee90'; // light green
-        } else if (score > 0) {
-          return '#ffff00'; // yellow
-        } else if (score == -0.1) {
-          return '#bdbdbd'; // gray
-        } else if (score > -0.2) {
-          return '#ffa07a'; // light salmon
-        } else if (score > -0.3) {
-          return '#ff7f50'; // coral
-        } else {
-          return '#ff4e4a'; // red
-        }
-      };
+  const getDayColor = (score) => {
+    if (score === null) {
+      return 'transparent'; // transparent 'colour' is user has no summary for that day
+    } else if (score >= 0.3) {
+      return '#3cb371'; // green
+    } else if (score >= 0.2) {
+      return '#90ee90'; // light green
+    } else if (score > 0) {
+      return '#ffff00'; // yellow
+    } else if (score == -0.1) {
+      return '#bdbdbd'; // gray
+    } else if (score > -0.2) {
+      return '#ffa07a'; // light salmon
+    } else if (score > -0.3) {
+      return '#ff7f50'; // coral
+    } else {
+      return '#ff4e4a'; // red
+    }
+  };
 
 
     return (
