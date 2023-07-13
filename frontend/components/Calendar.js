@@ -12,9 +12,14 @@ const EntryCalendar = ({ onDayPress, selectedDate }) => {
   const auth = getAuth();
   const user = auth.currentUser;
   const userID = user ? user.uid : null;
+  //convert date for format accepted by sentiment analysis 
+  const originalDate = selectedDate;
+  const parts = originalDate.split('-');
+  const convertedDate = `${parts[2]}-${parts[0]}-${parts[1]}`
+  console.log("converted date", convertedDate)
 
   const summary = useSummary(userID, selectedDate)
-
+  
     const renderArrow = (direction) => (
         <View style={[styles.arrow, direction === 'left' ? styles.arrowLeft : styles.arrowRight]}>
             <Icon
@@ -26,8 +31,15 @@ const EntryCalendar = ({ onDayPress, selectedDate }) => {
         </View>
     );
     console.log('summary calendar', summary)
-    const sentimentScores = sentiment.analyze(summary).comparative
-  
+
+    let sentimentScores;
+    if (summary === "Please add an entry") {
+      sentimentScores = null;
+    } else {
+      sentimentScores = sentiment.analyze(summary).comparative;
+    }
+    
+  console.log("sentiment score", sentimentScores)
 
     const getDayColor = (score) => {
         if (score >= 0.3) {
@@ -62,9 +74,9 @@ const EntryCalendar = ({ onDayPress, selectedDate }) => {
             }}
             theme={{
               backgroundColor: '#3B4252',
-              calendarBackground: '3B4252',
+              calendarBackground: '#3B422',
               textSectionTitleColor: '#ffffff',
-              selectedDayBackgroundColor: '##ffffff',
+              selectedDayBackgroundColor: '#ffffff',
               selectedDayTextColor: '#ffffff',
               todayTextColor: '#00adf5',
               todayBackgroundColor: '#ffffff',
@@ -76,16 +88,24 @@ const EntryCalendar = ({ onDayPress, selectedDate }) => {
             // Callback that gets called when the user selects a day
             onDayPress={onDayPress}
             // Mark specific dates as marked
-            markedDates={
-                Object.entries(sentimentScores).reduce((acc, [date, score]) => {
-                    acc[date] = {
-                        selected: true,
-                        marked: true,
-                        selectedColor: getDayColor(score),
-                    };
-                    return acc
-                } , {})
-            }
+            //this belowe should be for all dates 
+            // markedDates={
+            //     Object.entries(sentimentScores).reduce((acc, [convertedDate, score]) => {
+            //         acc[convertedDate] = {
+            //             selected: true,
+            //             marked: true,
+            //             selectedColor: getDayColor(score),
+            //         };
+            //         return acc
+            //     } , {})
+            // }
+            markedDates={{
+              [convertedDate]: {
+                selected: true,
+                marked: true,
+                selectedColor: getDayColor(sentimentScores),
+              },
+            }}
             // Render custom header component
             // renderHeader={renderHeader}
             // Render custom arrow component
