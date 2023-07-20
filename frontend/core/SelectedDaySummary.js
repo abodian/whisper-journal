@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { StyleSheet, View, Dimensions, ScrollView } from 'react-native'
 import { Text } from 'react-native-paper'
 import { getAuth } from "firebase/auth"; //for user id 
+import { useSummary } from '../components/useSummary';
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -15,6 +16,7 @@ export default function SelectedDaySummary( {selectedDate} ) {
   const auth = getAuth();
   const user = auth.currentUser;
   const userID = user ? user.uid : null;
+ 
 
   useEffect(() => {
     const fetchSummary = async () => {

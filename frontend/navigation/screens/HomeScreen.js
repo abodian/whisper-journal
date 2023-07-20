@@ -28,7 +28,7 @@ const HomeScreen = ({ navigation }) => {
       <ScrollView>
         <View style={styles.container}>
           <View style={styles.calendarContainer}>
-            <EntryCalendar onDayPress={handleDayPress} />
+            <EntryCalendar onDayPress={handleDayPress} selectedDate={formattedSelectedDate} />
           </View>
 
           <View style={styles.summaryContainer}>
